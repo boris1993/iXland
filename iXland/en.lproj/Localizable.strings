@@ -24,3 +24,4 @@
 
 "msgInvalidCookieQrCode" = "Invalid QR code for adding cookie";
 "msgCookieAlreadyImported" = "This cookie has already imported";
+"msgFailedToCreateZXMultiFormatReader" = "Failed to create ZXMultiFormatReader";

@@ -1,6 +1,8 @@
 import SwiftUI
 import CodeScanner
 import AlertToast
+import ImagePickerView
+import ZXingObjC
 
 struct SettingsView: View {
     let logger = LoggerHelper.getLoggerForView(name: "SettingsView")
@@ -35,6 +37,12 @@ struct SettingsView: View {
     
     @State
     private var isQrCodeScannerShowing = false
+    
+    @State
+    private var isPhotoPickerShowing = false
+    
+    @State
+    private var image: UIImage?
     
     @State
     private var isErrorToastShowing = false
@@ -123,13 +131,18 @@ struct SettingsView: View {
                         }
                         
                         Button("buttonImportFromPhotos") {
-                            
+                            self.isPhotoPickerShowing.toggle()
                         }
                     }
                     .sheet(isPresented: $isQrCodeScannerShowing) {
                         CodeScannerView(
                             codeTypes: [.qr],
                             completion: handleQrCodeScan(result:))
+                    }
+                    .sheet(isPresented: $isPhotoPickerShowing) {
+                        ImagePickerView(sourceType: .photoLibrary) { image in
+                            handleDecodeQrCodeFromPicture(uiImage: image)
+                        }
                     }
                 }
                 
@@ -172,45 +185,75 @@ struct SettingsView: View {
         case .success(let result):
             let qrCodeRawData = result.string
             logger.debug("QR Code result = \(qrCodeRawData)")
-                        
-            let anoBbsCookie: AnoBbsCookie
-            do {
-                anoBbsCookie = try jsonDecoder.decode(
-                    AnoBbsCookie.self,
-                    from: qrCodeRawData.data(using: .utf8)!)
-            } catch {
-                logger.error("\(error.localizedDescription)")
-                showErrorToast(message: error.localizedDescription)
-                return
-            }
             
-            let isCookieAlreadyImported: Bool
-            do {
-                isCookieAlreadyImported =
-                try persistenceController.isCookieImported(name: anoBbsCookie.name)
-            } catch {
-                logger.error("\(error.localizedDescription)")
-                showErrorToast(message: error.localizedDescription)
-                return
-            }
-            
-            if (isCookieAlreadyImported) {
-                let errorMessage = String(localized: "msgCookieAlreadyImported")
-                showErrorToast(message: errorMessage)
-                return
-            }
-            
-            let cookie = Cookie(context: persistenceController.container.viewContext)
-            cookie.name = anoBbsCookie.name
-            cookie.cookie = anoBbsCookie.cookie
-            
-            do {
-                try persistenceController.addCookie(cookie: cookie)
-            } catch {
-                showErrorToast(message: error.localizedDescription)
-            }
+            deserializeAndSaveCookie(cookieContent: qrCodeRawData)
         case .failure(let error):
             logger.error("\(error.localizedDescription)")
+        }
+    }
+    
+    private func handleDecodeQrCodeFromPicture(uiImage: UIImage) {
+        let cgImage = uiImage.cgImage
+        let source = ZXCGImageLuminanceSource(cgImage: cgImage)
+        let bitmap = ZXBinaryBitmap.init(binarizer: ZXHybridBinarizer(source: source))
+        if let reader = ZXMultiFormatReader.reader() as? ZXMultiFormatReader {
+            do {
+                let hints = ZXDecodeHints.hints()
+                let result = try reader.decode(bitmap, hints: hints as? ZXDecodeHints)
+                let contents = result.text
+                
+                if (contents == nil) {
+                    showErrorToast(message: String(localized: "msgInvalidCookieQrCode"))
+                    return
+                }
+                
+                logger.debug("Content of QR code decoded from picture: \(contents!)")
+                
+                deserializeAndSaveCookie(cookieContent: contents!)
+            } catch {
+                showErrorToast(message: error.localizedDescription)
+            }
+        } else {
+            showErrorToast(message: String(localized: "msgFailedToCreateZXMultiFormatReader"))
+        }
+    }
+    
+    private func deserializeAndSaveCookie(cookieContent: String) {
+        let anoBbsCookie: AnoBbsCookie
+        do {
+            anoBbsCookie = try jsonDecoder.decode(
+                AnoBbsCookie.self,
+                from: cookieContent.data(using: .utf8)!)
+        } catch {
+            logger.error("\(error.localizedDescription)")
+            showErrorToast(message: error.localizedDescription)
+            return
+        }
+        
+        let isCookieAlreadyImported: Bool
+        do {
+            isCookieAlreadyImported =
+            try persistenceController.isCookieImported(name: anoBbsCookie.name)
+        } catch {
+            logger.error("\(error.localizedDescription)")
+            showErrorToast(message: error.localizedDescription)
+            return
+        }
+        
+        if (isCookieAlreadyImported) {
+            let errorMessage = String(localized: "msgCookieAlreadyImported")
+            showErrorToast(message: errorMessage)
+            return
+        }
+        
+        let cookie = Cookie(context: persistenceController.container.viewContext)
+        cookie.name = anoBbsCookie.name
+        cookie.cookie = anoBbsCookie.cookie
+        
+        do {
+            try persistenceController.addCookie(cookie: cookie)
+        } catch {
+            showErrorToast(message: error.localizedDescription)
         }
     }
     

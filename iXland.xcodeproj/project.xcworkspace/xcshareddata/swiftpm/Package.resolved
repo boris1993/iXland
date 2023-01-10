@@ -17,6 +17,24 @@
         "revision" : "c7859712034a08bb5a018fbe8751c1f1edc4b248",
         "version" : "2.2.1"
       }
+    },
+    {
+      "identity" : "imagepickerview",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ralfebert/ImagePickerView",
+      "state" : {
+        "revision" : "b84dd1c85a65cddba40c89699cd63ba0cb248dbd",
+        "version" : "0.5.0"
+      }
+    },
+    {
+      "identity" : "zxingify-objc",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/zxingify/zxingify-objc",
+      "state" : {
+        "revision" : "e75eeff2089d66fc94514b43db3678a8812a9bbe",
+        "version" : "3.6.7"
+      }
     }
   ],
   "version" : 2

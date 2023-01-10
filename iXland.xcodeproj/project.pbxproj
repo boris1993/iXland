@@ -29,6 +29,8 @@
 		FDAE30FB296C4F12006252EF /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = FDAE30FA296C4F12006252EF /* CodeScanner */; };
 		FDAE30FE296C5C4B006252EF /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDAE30FD296C5C4B006252EF /* Errors.swift */; };
 		FDAE3101296C6241006252EF /* AlertToast in Frameworks */ = {isa = PBXBuildFile; productRef = FDAE3100296C6241006252EF /* AlertToast */; };
+		FDAE310C296D61DF006252EF /* ImagePickerView in Frameworks */ = {isa = PBXBuildFile; productRef = FDAE310B296D61DF006252EF /* ImagePickerView */; };
+		FDAE310F296D62C5006252EF /* ZXingObjC in Frameworks */ = {isa = PBXBuildFile; productRef = FDAE310E296D62C5006252EF /* ZXingObjC */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,8 +85,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FDAE310C296D61DF006252EF /* ImagePickerView in Frameworks */,
 				FDAE30FB296C4F12006252EF /* CodeScanner in Frameworks */,
 				FDAE3101296C6241006252EF /* AlertToast in Frameworks */,
+				FDAE310F296D62C5006252EF /* ZXingObjC in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -211,6 +215,8 @@
 			packageProductDependencies = (
 				FDAE30FA296C4F12006252EF /* CodeScanner */,
 				FDAE3100296C6241006252EF /* AlertToast */,
+				FDAE310B296D61DF006252EF /* ImagePickerView */,
+				FDAE310E296D62C5006252EF /* ZXingObjC */,
 			);
 			productName = iXland;
 			productReference = FD8E4E812960A27F0091782A /* iXland.app */;
@@ -287,6 +293,8 @@
 			packageReferences = (
 				FDAE30F9296C4F12006252EF /* XCRemoteSwiftPackageReference "CodeScanner" */,
 				FDAE30FF296C6241006252EF /* XCRemoteSwiftPackageReference "AlertToast" */,
+				FDAE310A296D61DF006252EF /* XCRemoteSwiftPackageReference "ImagePickerView" */,
+				FDAE310D296D62C5006252EF /* XCRemoteSwiftPackageReference "zxingify-objc" */,
 			);
 			productRefGroup = FD8E4E822960A27F0091782A /* Products */;
 			projectDirPath = "";
@@ -722,6 +730,22 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		FDAE310A296D61DF006252EF /* XCRemoteSwiftPackageReference "ImagePickerView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ralfebert/ImagePickerView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.5.0;
+			};
+		};
+		FDAE310D296D62C5006252EF /* XCRemoteSwiftPackageReference "zxingify-objc" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/zxingify/zxingify-objc";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -734,6 +758,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = FDAE30FF296C6241006252EF /* XCRemoteSwiftPackageReference "AlertToast" */;
 			productName = AlertToast;
+		};
+		FDAE310B296D61DF006252EF /* ImagePickerView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FDAE310A296D61DF006252EF /* XCRemoteSwiftPackageReference "ImagePickerView" */;
+			productName = ImagePickerView;
+		};
+		FDAE310E296D62C5006252EF /* ZXingObjC */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FDAE310D296D62C5006252EF /* XCRemoteSwiftPackageReference "zxingify-objc" */;
+			productName = ZXingObjC;
 		};
 /* End XCSwiftPackageProductDependency section */
 
