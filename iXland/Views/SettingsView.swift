@@ -27,7 +27,7 @@ struct SettingsView: View {
     private var isHapticFeedbackEnabled = UserDefaultsHelper.getHapticFeedbackEnabledState()
     
     @State
-    private var subscriptionId: String = ""
+    private var subscriptionId: String = UserDefaultsHelper.getSubscriptionId()
     
     @State
     private var themePickerSelectedValue: Themes = Themes.dark
@@ -163,8 +163,6 @@ struct SettingsView: View {
                 HapticsHelper.playHapticFeedback()
             }
             
-            subscriptionId = UserDefaultsHelper.getSubscriptionId()
-            
             let selectedTheme = UserDefaultsHelper.getSelectedTheme() ??
             (systemColorScheme == .dark ? Themes.dark.rawValue : Themes.light.rawValue)
             
@@ -260,6 +258,11 @@ struct SettingsView: View {
     private func handleRemoveCookie(at offsets: IndexSet) {
         for index in offsets {
             let cookieToBeDeleted = cookies[index]
+            
+            if (cookieToBeDeleted == currentSelectedCookie) {
+                currentSelectedCookie = nil
+                UserDefaultsHelper.removeCurrentCookie()
+            }
             
             do {
                 try persistenceController.removeCookie(cookie: cookieToBeDeleted)

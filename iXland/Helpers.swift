@@ -74,6 +74,10 @@ class UserDefaultsHelper {
     static func setCurrentCookie(currentCookieName: String) throws {
         userDefaults.set(currentCookieName, forKey: UserDefaultsKey.CURRENT_COOKIE)
     }
+    
+    static func removeCurrentCookie() {
+        userDefaults.removeObject(forKey: UserDefaultsKey.CURRENT_COOKIE)
+    }
 }
 
 class HapticsHelper {
