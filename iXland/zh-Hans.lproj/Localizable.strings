@@ -1,0 +1,26 @@
+"tabNameTimeline" = "时间线";
+"tabNameForums" = "版面";
+"tabNameFavourites" = "收藏";
+"tabNameSettings" = "设定";
+
+"sectionNameApperance" = "外观";
+"sectionNameCookieList" = "饼干列表";
+"sectionNameAbout" = "关于";
+
+"fieldTitleTheme" = "主题";
+"fieldTitleHapticFeedback" = "震动反馈";
+"fieldTitleSubscriptionId" = "订阅ID";
+"fieldTitleViewInGitHub" = "在GitHub查看";
+
+"themeAuto" = "跟随系统";
+"themeDark" = "深色";
+"themeLight" = "浅色";
+
+"buttonAddCookie" = "添加饼干";
+"buttonScanQRCode" = "扫描二维码";
+"buttonImportFromPhotos" = "从图库导入";
+
+"placeholderEmptySubIdNotification" = "空订阅ID也是有效的订阅ID";
+
+"msgInvalidCookieQrCode" = "添加饼干所用的二维码无效";
+"msgCookieAlreadyImported" = "这个饼干已经被导入了";

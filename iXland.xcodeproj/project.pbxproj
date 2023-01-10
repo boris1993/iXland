@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FD254FBE296B16BC00B26C82 /* TimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD254FBD296B16BC00B26C82 /* TimelineView.swift */; };
+		FD254FC0296B16C900B26C82 /* ForumsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD254FBF296B16C900B26C82 /* ForumsView.swift */; };
+		FD254FC2296B16D500B26C82 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD254FC1296B16D500B26C82 /* SettingsView.swift */; };
+		FD254FC5296B233000B26C82 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FD254FC7296B233000B26C82 /* Localizable.strings */; };
+		FD254FCA296B2CAA00B26C82 /* FavouritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD254FC9296B2CAA00B26C82 /* FavouritesView.swift */; };
+		FD254FCF296BE27900B26C82 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD254FCE296BE27900B26C82 /* Constants.swift */; };
+		FD254FD1296BED5D00B26C82 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD254FD0296BED5D00B26C82 /* Helpers.swift */; };
+		FD254FD3296BFB0400B26C82 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD254FD2296BFB0400B26C82 /* Extensions.swift */; };
 		FD8E4E852960A27F0091782A /* iXlandApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8E4E842960A27F0091782A /* iXlandApp.swift */; };
 		FD8E4E872960A27F0091782A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8E4E862960A27F0091782A /* ContentView.swift */; };
 		FD8E4E892960A2800091782A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD8E4E882960A2800091782A /* Assets.xcassets */; };
@@ -16,6 +24,11 @@
 		FD8E4E9C2960A2800091782A /* iXlandTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8E4E9B2960A2800091782A /* iXlandTests.swift */; };
 		FD8E4EA62960A2800091782A /* iXlandUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8E4EA52960A2800091782A /* iXlandUITests.swift */; };
 		FD8E4EA82960A2800091782A /* iXlandUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8E4EA72960A2800091782A /* iXlandUITestsLaunchTests.swift */; };
+		FD93D05B2966B0E700279A30 /* ForumGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD93D05A2966B0E700279A30 /* ForumGroup.swift */; };
+		FDAE30F8296C4DEE006252EF /* AnoBbsCookie.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDAE30F7296C4DEE006252EF /* AnoBbsCookie.swift */; };
+		FDAE30FB296C4F12006252EF /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = FDAE30FA296C4F12006252EF /* CodeScanner */; };
+		FDAE30FE296C5C4B006252EF /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDAE30FD296C5C4B006252EF /* Errors.swift */; };
+		FDAE3101296C6241006252EF /* AlertToast in Frameworks */ = {isa = PBXBuildFile; productRef = FDAE3100296C6241006252EF /* AlertToast */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +49,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FD254FBD296B16BC00B26C82 /* TimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineView.swift; sourceTree = "<group>"; };
+		FD254FBF296B16C900B26C82 /* ForumsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForumsView.swift; sourceTree = "<group>"; };
+		FD254FC1296B16D500B26C82 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		FD254FC6296B233000B26C82 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		FD254FC8296B233700B26C82 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		FD254FC9296B2CAA00B26C82 /* FavouritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesView.swift; sourceTree = "<group>"; };
+		FD254FCE296BE27900B26C82 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		FD254FD0296BED5D00B26C82 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
+		FD254FD2296BFB0400B26C82 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		FD8E4E812960A27F0091782A /* iXland.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iXland.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD8E4E842960A27F0091782A /* iXlandApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iXlandApp.swift; sourceTree = "<group>"; };
 		FD8E4E862960A27F0091782A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -43,12 +65,17 @@
 		FD8E4E8B2960A2800091782A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		FD8E4E8D2960A2800091782A /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		FD8E4E902960A2800091782A /* iXland.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = iXland.xcdatamodel; sourceTree = "<group>"; };
-		FD8E4E922960A2800091782A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FD8E4E972960A2800091782A /* iXlandTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iXlandTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD8E4E9B2960A2800091782A /* iXlandTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iXlandTests.swift; sourceTree = "<group>"; };
 		FD8E4EA12960A2800091782A /* iXlandUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iXlandUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD8E4EA52960A2800091782A /* iXlandUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iXlandUITests.swift; sourceTree = "<group>"; };
 		FD8E4EA72960A2800091782A /* iXlandUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iXlandUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		FD93D05A2966B0E700279A30 /* ForumGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForumGroup.swift; sourceTree = "<group>"; };
+		FDAE30F7296C4DEE006252EF /* AnoBbsCookie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnoBbsCookie.swift; sourceTree = "<group>"; };
+		FDAE30FD296C5C4B006252EF /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		FDAE3105296C72F7006252EF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		FDAE3107296C72F9006252EF /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		FDAE3108296C747D006252EF /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = iXland/Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +83,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FDAE30FB296C4F12006252EF /* CodeScanner in Frameworks */,
+				FDAE3101296C6241006252EF /* AlertToast in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,9 +105,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FD254FBC296B169C00B26C82 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FD254FBD296B16BC00B26C82 /* TimelineView.swift */,
+				FD254FBF296B16C900B26C82 /* ForumsView.swift */,
+				FD254FC1296B16D500B26C82 /* SettingsView.swift */,
+				FD254FC9296B2CAA00B26C82 /* FavouritesView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		FD8E4E782960A27F0091782A = {
 			isa = PBXGroup;
 			children = (
+				FDAE3108296C747D006252EF /* Info.plist */,
+				FDAE3106296C72F7006252EF /* InfoPlist.strings */,
 				FD8E4E832960A27F0091782A /* iXland */,
 				FD8E4E9A2960A2800091782A /* iXlandTests */,
 				FD8E4EA42960A2800091782A /* iXlandUITests */,
@@ -99,13 +141,19 @@
 		FD8E4E832960A27F0091782A /* iXland */ = {
 			isa = PBXGroup;
 			children = (
+				FD254FBC296B169C00B26C82 /* Views */,
+				FD93D0592966B08D00279A30 /* Models */,
 				FD8E4E842960A27F0091782A /* iXlandApp.swift */,
-				FD8E4E862960A27F0091782A /* ContentView.swift */,
 				FD8E4E882960A2800091782A /* Assets.xcassets */,
 				FD8E4E8D2960A2800091782A /* Persistence.swift */,
-				FD8E4E922960A2800091782A /* Info.plist */,
 				FD8E4E8F2960A2800091782A /* iXland.xcdatamodeld */,
 				FD8E4E8A2960A2800091782A /* Preview Content */,
+				FD254FC7296B233000B26C82 /* Localizable.strings */,
+				FD254FCE296BE27900B26C82 /* Constants.swift */,
+				FD8E4E862960A27F0091782A /* ContentView.swift */,
+				FD254FD0296BED5D00B26C82 /* Helpers.swift */,
+				FD254FD2296BFB0400B26C82 /* Extensions.swift */,
+				FDAE30FD296C5C4B006252EF /* Errors.swift */,
 			);
 			path = iXland;
 			sourceTree = "<group>";
@@ -135,6 +183,15 @@
 			path = iXlandUITests;
 			sourceTree = "<group>";
 		};
+		FD93D0592966B08D00279A30 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				FD93D05A2966B0E700279A30 /* ForumGroup.swift */,
+				FDAE30F7296C4DEE006252EF /* AnoBbsCookie.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -151,6 +208,10 @@
 			dependencies = (
 			);
 			name = iXland;
+			packageProductDependencies = (
+				FDAE30FA296C4F12006252EF /* CodeScanner */,
+				FDAE3100296C6241006252EF /* AlertToast */,
+			);
 			productName = iXland;
 			productReference = FD8E4E812960A27F0091782A /* iXland.app */;
 			productType = "com.apple.product-type.application";
@@ -220,9 +281,13 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
-				Base,
+				"zh-Hans",
 			);
 			mainGroup = FD8E4E782960A27F0091782A;
+			packageReferences = (
+				FDAE30F9296C4F12006252EF /* XCRemoteSwiftPackageReference "CodeScanner" */,
+				FDAE30FF296C6241006252EF /* XCRemoteSwiftPackageReference "AlertToast" */,
+			);
 			productRefGroup = FD8E4E822960A27F0091782A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -240,6 +305,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FD8E4E8C2960A2800091782A /* Preview Assets.xcassets in Resources */,
+				FD254FC5296B233000B26C82 /* Localizable.strings in Resources */,
 				FD8E4E892960A2800091782A /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -266,8 +332,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				FD8E4E8E2960A2800091782A /* Persistence.swift in Sources */,
+				FD254FCA296B2CAA00B26C82 /* FavouritesView.swift in Sources */,
+				FDAE30F8296C4DEE006252EF /* AnoBbsCookie.swift in Sources */,
+				FD254FC2296B16D500B26C82 /* SettingsView.swift in Sources */,
+				FD254FC0296B16C900B26C82 /* ForumsView.swift in Sources */,
+				FD254FBE296B16BC00B26C82 /* TimelineView.swift in Sources */,
+				FDAE30FE296C5C4B006252EF /* Errors.swift in Sources */,
+				FD254FCF296BE27900B26C82 /* Constants.swift in Sources */,
 				FD8E4E872960A27F0091782A /* ContentView.swift in Sources */,
+				FD254FD3296BFB0400B26C82 /* Extensions.swift in Sources */,
 				FD8E4E852960A27F0091782A /* iXlandApp.swift in Sources */,
+				FD254FD1296BED5D00B26C82 /* Helpers.swift in Sources */,
+				FD93D05B2966B0E700279A30 /* ForumGroup.swift in Sources */,
 				FD8E4E912960A2800091782A /* iXland.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -303,6 +379,27 @@
 			targetProxy = FD8E4EA22960A2800091782A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		FD254FC7296B233000B26C82 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FD254FC6296B233000B26C82 /* zh-Hans */,
+				FD254FC8296B233700B26C82 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		FDAE3106296C72F7006252EF /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FDAE3105296C72F7006252EF /* en */,
+				FDAE3107296C72F9006252EF /* zh-Hans */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		FD8E4EA92960A2800091782A /* Debug */ = {
@@ -430,11 +527,15 @@
 				DEVELOPMENT_TEAM = 7X6JJBWX93;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = iXland/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = iXland;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
+				INFOPLIST_KEY_NSCameraUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -442,9 +543,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.boris1993.iXland;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -459,11 +563,15 @@
 				DEVELOPMENT_TEAM = 7X6JJBWX93;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = iXland/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = iXland;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
+				INFOPLIST_KEY_NSCameraUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -471,9 +579,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.boris1993.iXland;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -593,6 +704,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		FDAE30F9296C4F12006252EF /* XCRemoteSwiftPackageReference "CodeScanner" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/twostraws/CodeScanner";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+		FDAE30FF296C6241006252EF /* XCRemoteSwiftPackageReference "AlertToast" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/elai950/AlertToast.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		FDAE30FA296C4F12006252EF /* CodeScanner */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FDAE30F9296C4F12006252EF /* XCRemoteSwiftPackageReference "CodeScanner" */;
+			productName = CodeScanner;
+		};
+		FDAE3100296C6241006252EF /* AlertToast */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FDAE30FF296C6241006252EF /* XCRemoteSwiftPackageReference "AlertToast" */;
+			productName = AlertToast;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		FD8E4E8F2960A2800091782A /* iXland.xcdatamodeld */ = {

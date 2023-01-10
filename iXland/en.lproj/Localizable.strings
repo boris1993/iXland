@@ -1,0 +1,26 @@
+"tabNameTimeline" = "Timeline";
+"tabNameForums" = "Forms";
+"tabNameFavourites" = "Favourites";
+"tabNameSettings" = "Settings";
+
+"sectionNameApperance" = "Apperance";
+"sectionNameCookieList" = "Cookies";
+"sectionNameAbout" = "About";
+
+"fieldTitleTheme" = "Theme";
+"fieldTitleHapticFeedback" = "Haptic feedback";
+"fieldTitleSubscriptionId" = "Subscription ID";
+"fieldTitleViewInGitHub" = "View In GitHub";
+
+"themeAuto" = "Auto";
+"themeDark" = "Dark";
+"themeLight" = "Light";
+
+"buttonAddCookie" = "Add a cookie";
+"buttonScanQRCode" = "Scan QR code";
+"buttonImportFromPhotos" = "Import from photos";
+
+"placeholderEmptySubIdNotification" = "The empty subscription ID is also valid";
+
+"msgInvalidCookieQrCode" = "Invalid QR code for adding cookie";
+"msgCookieAlreadyImported" = "This cookie has already imported";
