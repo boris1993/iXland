@@ -1,8 +1,8 @@
 import SwiftUI
 import CodeScanner
-import AlertToast
 import ImagePickerView
 import ZXingObjC
+import AlertToast
 
 struct SettingsView: View {
     let logger = LoggerHelper.getLoggerForView(name: "SettingsView")
@@ -11,10 +11,13 @@ struct SettingsView: View {
     private let persistenceController = PersistenceController.shared
     
     @Environment(\.managedObjectContext)
-    var managedObjectContext
+    private var managedObjectContext
     
     @Environment(\.colorScheme)
-    var systemColorScheme
+    private var systemColorScheme
+    
+    @ObservedObject
+    var globalState: GlobalState
     
     @FetchRequest(
         entity: Cookie.entity(),
@@ -33,9 +36,6 @@ struct SettingsView: View {
     private var themePickerSelectedValue: Themes = Themes.dark
     
     @State
-    private var currentSelectedCookie: Cookie? = try? UserDefaultsHelper.getCurrentCookie()
-    
-    @State
     private var isQrCodeScannerShowing = false
     
     @State
@@ -51,12 +51,10 @@ struct SettingsView: View {
     private var errorMessage: String = ""
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             List {
                 // MARK: 设定
-                Section(
-                    header: Text("tabNameSettings")
-                ) {
+                Section {
                     HStack {
                         Text("fieldTitleTheme")
                         Spacer()
@@ -102,54 +100,14 @@ struct SettingsView: View {
                         )
                         .buttonStyle(.borderless)
                     }
-                }
-                
-                // MARK: 饼干列表
-                Section(
-                    header: Text("sectionNameCookieList")
-                ) {
-                    ForEach(cookies) { cookie in
-                        Button {
-                            currentSelectedCookie = cookie
-                            do {
-                                try UserDefaultsHelper.setCurrentCookie(currentCookieName: cookie.name!)
-                            } catch {
-                                errorMessage = error.localizedDescription
-                                isErrorToastShowing = true
-                            }
-                        } label: {
-                            Text(cookie.name!)
-                                .fontWeight(currentSelectedCookie == cookie ? .bold : .regular)
-                        }
-                        .foregroundColor(.primary)
-                    }
-                    .onDelete(perform: handleRemoveCookie)
                     
-                    Menu("buttonAddCookie") {
-                        Button("buttonScanQRCode") {
-                            self.isQrCodeScannerShowing.toggle()
-                        }
-                        
-                        Button("buttonImportFromPhotos") {
-                            self.isPhotoPickerShowing.toggle()
-                        }
-                    }
-                    .sheet(isPresented: $isQrCodeScannerShowing) {
-                        CodeScannerView(
-                            codeTypes: [.qr],
-                            completion: handleQrCodeScan(result:))
-                    }
-                    .sheet(isPresented: $isPhotoPickerShowing) {
-                        ImagePickerView(sourceType: .photoLibrary) { image in
-                            handleDecodeQrCodeFromPicture(uiImage: image)
-                        }
+                    NavigationLink(destination: CookieListView(globalState: globalState)) {
+                        Text("CookieList")
                     }
                 }
                 
                 // MARK: 关于
-                Section(
-                    header: Text("sectionNameAbout")
-                ) {
+                Section {
                     HStack {
                         Link(
                             "fieldTitleViewInGitHub",
@@ -158,118 +116,18 @@ struct SettingsView: View {
                 }
             }
         }
+        .navigationViewStyle(.stack)
         .onAppear() {
-            if (isHapticFeedbackEnabled) {
-                HapticsHelper.playHapticFeedback()
-            }
-            
             let selectedTheme = UserDefaultsHelper.getSelectedTheme() ??
             (systemColorScheme == .dark ? Themes.dark.rawValue : Themes.light.rawValue)
             
             themePickerSelectedValue = Themes(rawValue: selectedTheme)!
-            ThemeHelper.setAppTheme(themePickerSelectedValue: themePickerSelectedValue)
             
-            logger.debug("Current cookie: \(currentSelectedCookie)")
+//            let currentSelectedCookie = try? UserDefaultsHelper.getCurrentCookie()
+            logger.debug("Current cookie: \(globalState.currentSelectedCookie)")
         }
         .toast(isPresenting: $isErrorToastShowing) {
             AlertToast(type: .regular, title: errorMessage)
-        }
-    }
-    
-    private func handleQrCodeScan(result: Result<ScanResult, ScanError>) {
-        isQrCodeScannerShowing = false
-        
-        switch result {
-        case .success(let result):
-            let qrCodeRawData = result.string
-            logger.debug("QR Code result = \(qrCodeRawData)")
-            
-            deserializeAndSaveCookie(cookieContent: qrCodeRawData)
-        case .failure(let error):
-            logger.error("\(error.localizedDescription)")
-        }
-    }
-    
-    private func handleDecodeQrCodeFromPicture(uiImage: UIImage) {
-        let cgImage = uiImage.cgImage
-        let source = ZXCGImageLuminanceSource(cgImage: cgImage)
-        let bitmap = ZXBinaryBitmap.init(binarizer: ZXHybridBinarizer(source: source))
-        if let reader = ZXMultiFormatReader.reader() as? ZXMultiFormatReader {
-            do {
-                let hints = ZXDecodeHints.hints()
-                let result = try reader.decode(bitmap, hints: hints as? ZXDecodeHints)
-                let contents = result.text
-                
-                if (contents == nil) {
-                    showErrorToast(message: String(localized: "msgInvalidCookieQrCode"))
-                    return
-                }
-                
-                logger.debug("Content of QR code decoded from picture: \(contents!)")
-                
-                deserializeAndSaveCookie(cookieContent: contents!)
-            } catch {
-                showErrorToast(message: error.localizedDescription)
-            }
-        } else {
-            showErrorToast(message: String(localized: "msgFailedToCreateZXMultiFormatReader"))
-        }
-    }
-    
-    private func deserializeAndSaveCookie(cookieContent: String) {
-        let anoBbsCookie: AnoBbsCookie
-        do {
-            anoBbsCookie = try jsonDecoder.decode(
-                AnoBbsCookie.self,
-                from: cookieContent.data(using: .utf8)!)
-        } catch {
-            logger.error("\(error.localizedDescription)")
-            showErrorToast(message: error.localizedDescription)
-            return
-        }
-        
-        let isCookieAlreadyImported: Bool
-        do {
-            isCookieAlreadyImported =
-            try persistenceController.isCookieImported(name: anoBbsCookie.name)
-        } catch {
-            logger.error("\(error.localizedDescription)")
-            showErrorToast(message: error.localizedDescription)
-            return
-        }
-        
-        if (isCookieAlreadyImported) {
-            let errorMessage = String(localized: "msgCookieAlreadyImported")
-            showErrorToast(message: errorMessage)
-            return
-        }
-        
-        let cookie = Cookie(context: persistenceController.container.viewContext)
-        cookie.name = anoBbsCookie.name
-        cookie.cookie = anoBbsCookie.cookie
-        
-        do {
-            try persistenceController.addCookie(cookie: cookie)
-        } catch {
-            showErrorToast(message: error.localizedDescription)
-        }
-    }
-    
-    private func handleRemoveCookie(at offsets: IndexSet) {
-        for index in offsets {
-            let cookieToBeDeleted = cookies[index]
-            
-            if (cookieToBeDeleted == currentSelectedCookie) {
-                currentSelectedCookie = nil
-                UserDefaultsHelper.removeCurrentCookie()
-            }
-            
-            do {
-                try persistenceController.removeCookie(cookie: cookieToBeDeleted)
-            } catch {
-                showErrorToast(message: error.localizedDescription)
-                return
-            }
         }
     }
     
@@ -289,16 +147,21 @@ struct SettingsView: View {
 }
 
 struct SettingsView_Previews: PreviewProvider {
+    @ObservedObject
+    static var globalState = GlobalState()
+    
     static var previews: some View {
         let context = PersistenceController.preview.container.viewContext
         
-        SettingsView()
+        SettingsView(globalState: globalState)
             .previewDisplayName("en")
             .environment(\.managedObjectContext, context)
+            .environment(\.colorScheme, .dark)
             .environment(\.locale, .init(identifier: "en"))
-        SettingsView()
+        SettingsView(globalState: globalState)
             .previewDisplayName("zh-Hans")
             .environment(\.managedObjectContext, context)
+            .environment(\.colorScheme, .dark)
             .environment(\.locale, .init(identifier: "zh-Hans"))
     }
 }

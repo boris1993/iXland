@@ -1,11 +1,8 @@
-"tabNameTimeline" = "时间线";
-"tabNameForums" = "版面";
-"tabNameFavourites" = "收藏";
-"tabNameSettings" = "设定";
-
-"sectionNameApperance" = "外观";
-"sectionNameCookieList" = "饼干列表";
-"sectionNameAbout" = "关于";
+"Timeline" = "时间线";
+"Forums" = "版面";
+"Favourites" = "收藏";
+"Settings" = "设定";
+"CookieList" = "饼干列表";
 
 "fieldTitleTheme" = "主题";
 "fieldTitleHapticFeedback" = "震动反馈";

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FD1F8098296E97DA00452116 /* CookieListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1F8097296E97DA00452116 /* CookieListView.swift */; };
 		FD254FBE296B16BC00B26C82 /* TimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD254FBD296B16BC00B26C82 /* TimelineView.swift */; };
 		FD254FC0296B16C900B26C82 /* ForumsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD254FBF296B16C900B26C82 /* ForumsView.swift */; };
 		FD254FC2296B16D500B26C82 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD254FC1296B16D500B26C82 /* SettingsView.swift */; };
@@ -25,6 +26,7 @@
 		FD8E4EA62960A2800091782A /* iXlandUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8E4EA52960A2800091782A /* iXlandUITests.swift */; };
 		FD8E4EA82960A2800091782A /* iXlandUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8E4EA72960A2800091782A /* iXlandUITestsLaunchTests.swift */; };
 		FD93D05B2966B0E700279A30 /* ForumGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD93D05A2966B0E700279A30 /* ForumGroup.swift */; };
+		FD979FA0296EBBFF00011B72 /* GlobalState.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD979F9F296EBBFF00011B72 /* GlobalState.swift */; };
 		FDAE30F8296C4DEE006252EF /* AnoBbsCookie.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDAE30F7296C4DEE006252EF /* AnoBbsCookie.swift */; };
 		FDAE30FB296C4F12006252EF /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = FDAE30FA296C4F12006252EF /* CodeScanner */; };
 		FDAE30FE296C5C4B006252EF /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDAE30FD296C5C4B006252EF /* Errors.swift */; };
@@ -51,6 +53,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FD1F8097296E97DA00452116 /* CookieListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookieListView.swift; sourceTree = "<group>"; };
 		FD254FBD296B16BC00B26C82 /* TimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineView.swift; sourceTree = "<group>"; };
 		FD254FBF296B16C900B26C82 /* ForumsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForumsView.swift; sourceTree = "<group>"; };
 		FD254FC1296B16D500B26C82 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -73,6 +76,7 @@
 		FD8E4EA52960A2800091782A /* iXlandUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iXlandUITests.swift; sourceTree = "<group>"; };
 		FD8E4EA72960A2800091782A /* iXlandUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iXlandUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		FD93D05A2966B0E700279A30 /* ForumGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForumGroup.swift; sourceTree = "<group>"; };
+		FD979F9F296EBBFF00011B72 /* GlobalState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalState.swift; sourceTree = "<group>"; };
 		FDAE30F7296C4DEE006252EF /* AnoBbsCookie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnoBbsCookie.swift; sourceTree = "<group>"; };
 		FDAE30FD296C5C4B006252EF /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		FDAE3105296C72F7006252EF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -116,6 +120,7 @@
 				FD254FBF296B16C900B26C82 /* ForumsView.swift */,
 				FD254FC1296B16D500B26C82 /* SettingsView.swift */,
 				FD254FC9296B2CAA00B26C82 /* FavouritesView.swift */,
+				FD1F8097296E97DA00452116 /* CookieListView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -158,6 +163,7 @@
 				FD254FD0296BED5D00B26C82 /* Helpers.swift */,
 				FD254FD2296BFB0400B26C82 /* Extensions.swift */,
 				FDAE30FD296C5C4B006252EF /* Errors.swift */,
+				FD979F9F296EBBFF00011B72 /* GlobalState.swift */,
 			);
 			path = iXland;
 			sourceTree = "<group>";
@@ -341,6 +347,7 @@
 			files = (
 				FD8E4E8E2960A2800091782A /* Persistence.swift in Sources */,
 				FD254FCA296B2CAA00B26C82 /* FavouritesView.swift in Sources */,
+				FD1F8098296E97DA00452116 /* CookieListView.swift in Sources */,
 				FDAE30F8296C4DEE006252EF /* AnoBbsCookie.swift in Sources */,
 				FD254FC2296B16D500B26C82 /* SettingsView.swift in Sources */,
 				FD254FC0296B16C900B26C82 /* ForumsView.swift in Sources */,
@@ -352,6 +359,7 @@
 				FD8E4E852960A27F0091782A /* iXlandApp.swift in Sources */,
 				FD254FD1296BED5D00B26C82 /* Helpers.swift in Sources */,
 				FD93D05B2966B0E700279A30 /* ForumGroup.swift in Sources */,
+				FD979FA0296EBBFF00011B72 /* GlobalState.swift in Sources */,
 				FD8E4E912960A2800091782A /* iXland.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -460,7 +468,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -514,7 +522,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -544,6 +552,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -580,6 +589,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

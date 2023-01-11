@@ -44,6 +44,7 @@ struct PersistenceController {
         
         let fetchRequest = Cookie.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "name LIKE %@", name)
+        fetchRequest.returnsObjectsAsFaults = false
         
         let cookie = try context.fetch(fetchRequest)
         

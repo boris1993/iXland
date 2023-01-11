@@ -1,11 +1,8 @@
-"tabNameTimeline" = "Timeline";
-"tabNameForums" = "Forms";
-"tabNameFavourites" = "Favourites";
-"tabNameSettings" = "Settings";
-
-"sectionNameApperance" = "Apperance";
-"sectionNameCookieList" = "Cookies";
-"sectionNameAbout" = "About";
+"Timeline" = "Timeline";
+"Forums" = "Forms";
+"Favourites" = "Favourites";
+"Settings" = "Settings";
+"CookieList" = "Cookies";
 
 "fieldTitleTheme" = "Theme";
 "fieldTitleHapticFeedback" = "Haptic feedback";

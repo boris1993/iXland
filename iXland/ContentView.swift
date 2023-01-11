@@ -2,6 +2,7 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
+    private let logger = LoggerHelper.getLoggerForView(name: "ContentView")
     private let persistenceController = PersistenceController.shared
     
     @Environment(\.managedObjectContext)
@@ -9,6 +10,9 @@ struct ContentView: View {
     
     @Environment(\.colorScheme)
     var systemColorScheme
+    
+    @StateObject
+    var globalState = GlobalState()
     
     @State
     private var selectedTab = Tab.Timeline
@@ -22,23 +26,27 @@ struct ContentView: View {
             TimelineView()
                 .tabItem {
                     Image(systemName: "calendar.day.timeline.left")
-                    Text("tabNameTimeline")
-                }.tag(Tab.Timeline)
+                    Text("Timeline")
+                }
+                .tag(Tab.Timeline)
             ForumsView()
                 .tabItem {
                     Image(systemName: "square.stack")
-                    Text("tabNameForums")
-                }.tag(Tab.Forums)
+                    Text("Forums")
+                }
+                .tag(Tab.Forums)
             FavouritesView()
                 .tabItem {
                     Image(systemName: "star")
-                    Text("tabNameFavourites")
-                }.tag(Tab.Favourites)
-            SettingsView()
+                    Text("Favourites")
+                }
+                .tag(Tab.Favourites)
+            SettingsView(globalState: globalState)
                 .tabItem {
                     Image(systemName: "gear")
-                    Text("tabNameSettings")
-                }.tag(Tab.Settings)
+                    Text("Settings")
+                }
+                .tag(Tab.Settings)
         }
         .onAppear() {
             let selectedTheme = UserDefaultsHelper.getSelectedTheme()
@@ -59,10 +67,12 @@ struct ContentView_Previews: PreviewProvider {
             ContentView()
                 .previewDisplayName("en")
                 .environment(\.managedObjectContext, context)
+                .environment(\.colorScheme, .dark)
                 .environment(\.locale, Locale(identifier: "en"))
             ContentView()
                 .previewDisplayName("zh-Hans")
                 .environment(\.managedObjectContext, context)
+                .environment(\.colorScheme, .dark)
                 .environment(\.locale, Locale.init(identifier: "zh-Hans"))
         }
     }

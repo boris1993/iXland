@@ -1,10 +1,3 @@
-//
-//  iXlandApp.swift
-//  iXland
-//
-//  Created by Boris Zhao on 2023-01-01.
-//
-
 import SwiftUI
 
 @main
