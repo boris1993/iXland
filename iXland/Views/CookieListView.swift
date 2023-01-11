@@ -49,15 +49,15 @@ struct CookieListView: View {
                         Text(cookie.name!)
                             .fontWeight(globalState.currentSelectedCookie == cookie ? .bold : .regular)
                     }
-                        .foregroundColor(.primary)
+                    .foregroundColor(.primary)
                 }
-                    .onDelete(perform: handleRemoveCookie)
+                .onDelete(perform: handleRemoveCookie)
             }
-                .toast(isPresenting: $isErrorToastShowing) {
+            .toast(isPresenting: $isErrorToastShowing) {
                 AlertToast(type: .regular, title: errorMessage)
             }
-                .navigationTitle("CookieList")
-                .toolbar {
+            .navigationTitle("CookieList")
+            .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Menu {
                         Button("buttonScanQRCode") {
@@ -70,19 +70,19 @@ struct CookieListView: View {
                     } label: {
                         Image(systemName: "plus")
                     }
-                        .sheet(isPresented: $isQrCodeScannerShowing) {
+                    .sheet(isPresented: $isQrCodeScannerShowing) {
                         CodeScannerView(
                             codeTypes: [.qr],
                             completion: handleQrCodeScan(result:))
                     }
-                        .sheet(isPresented: $isPhotoPickerShowing) {
+                    .sheet(isPresented: $isPhotoPickerShowing) {
                         ImagePickerView(sourceType: .photoLibrary) { image in
                             handleDecodeQrCodeFromPicture(uiImage: image)
                         }
                     }
                 }
             }
-                .navigationViewStyle(.stack)
+            .navigationViewStyle(.stack)
         }
     }
 
@@ -141,7 +141,7 @@ struct CookieListView: View {
         let isCookieAlreadyImported: Bool
         do {
             isCookieAlreadyImported =
-                try persistenceController.isCookieImported(name: anoBbsCookie.name)
+            try persistenceController.isCookieImported(name: anoBbsCookie.name)
         } catch {
             logger.error("\(error.localizedDescription)")
             showErrorToast(message: error.localizedDescription)

@@ -7,13 +7,13 @@ import AlertToast
 struct SettingsView: View {
     let logger = LoggerHelper.getLoggerForView(name: "SettingsView")
 
-    #if DEBUG
-        // Test Ad Units
-        // https://developers.google.com/admob/ios/test-ads#demo_ad_units
-        private let adUnitId = "ca-app-pub-3940256099942544/2934735716"
-    #else
-        private let adUnitId = "ca-app-pub-1056823357231661/5419266498"
-    #endif
+#if DEBUG
+    // Test Ad Units
+    // https://developers.google.com/admob/ios/test-ads#demo_ad_units
+    private let adUnitId = "ca-app-pub-3940256099942544/2934735716"
+#else
+    private let adUnitId = "ca-app-pub-1056823357231661/5419266498"
+#endif
 
     private let jsonDecoder = JSONDecoder()
     private let persistenceController = PersistenceController.shared
@@ -66,13 +66,13 @@ struct SettingsView: View {
                         Picker(
                             selection: $themePickerSelectedValue,
                             label: Text("fieldTitleDarkMode")) {
-                            Text("themeDark").tag(Themes.dark)
-                            Text("themeLight").tag(Themes.light)
-                        }
+                                Text("themeDark").tag(Themes.dark)
+                                Text("themeLight").tag(Themes.light)
+                            }
                             .onChange(of: themePickerSelectedValue) { _ in
-                            UserDefaultsHelper.setSelectedTheme(theme: themePickerSelectedValue.rawValue)
-                            ThemeHelper.setAppTheme(themePickerSelectedValue: themePickerSelectedValue)
-                        }
+                                UserDefaultsHelper.setSelectedTheme(theme: themePickerSelectedValue.rawValue)
+                                ThemeHelper.setAppTheme(themePickerSelectedValue: themePickerSelectedValue)
+                            }
                             .pickerStyle(.segmented)
                             .fixedSize()
                     }
@@ -86,8 +86,8 @@ struct SettingsView: View {
                             .multilineTextAlignment(.trailing)
                             .keyboardType(.asciiCapable)
                             .onChange(of: subscriptionId, perform: { _ in
-                            updateSubscriptionId()
-                        })
+                                updateSubscriptionId()
+                            })
                         Button(
                             action: {
                                 generateNewSubscriptionId()
@@ -95,7 +95,7 @@ struct SettingsView: View {
                                 Image(systemName: "arrow.clockwise")
                             }
                         )
-                            .buttonStyle(.borderless)
+                        .buttonStyle(.borderless)
                     }
 
                     NavigationLink(destination: CookieListView(globalState: globalState)) {
@@ -115,8 +115,8 @@ struct SettingsView: View {
 
             SwiftUIBannerAd(adPosition: .bottom, adUnitId: adUnitId)
         }
-            .navigationViewStyle(.stack)
-            .onAppear {
+        .navigationViewStyle(.stack)
+        .onAppear {
             let selectedTheme = UserDefaultsHelper.getSelectedTheme() ??
             (systemColorScheme == .dark ? Themes.dark.rawValue : Themes.light.rawValue)
 
@@ -124,7 +124,7 @@ struct SettingsView: View {
 
             logger.debug("Current cookie: \(globalState.currentSelectedCookie)")
         }
-            .toast(isPresenting: $isErrorToastShowing) {
+        .toast(isPresenting: $isErrorToastShowing) {
             AlertToast(type: .regular, title: errorMessage)
         }
     }
