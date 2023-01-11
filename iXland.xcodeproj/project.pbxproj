@@ -33,6 +33,9 @@
 		FDAE3101296C6241006252EF /* AlertToast in Frameworks */ = {isa = PBXBuildFile; productRef = FDAE3100296C6241006252EF /* AlertToast */; };
 		FDAE310C296D61DF006252EF /* ImagePickerView in Frameworks */ = {isa = PBXBuildFile; productRef = FDAE310B296D61DF006252EF /* ImagePickerView */; };
 		FDAE310F296D62C5006252EF /* ZXingObjC in Frameworks */ = {isa = PBXBuildFile; productRef = FDAE310E296D62C5006252EF /* ZXingObjC */; };
+		FDB92294296ED7B10036E091 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = FDB92293296ED7B10036E091 /* Alamofire */; };
+		FDB92297296EDB6A0036E091 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = FDB92296296EDB6A0036E091 /* GoogleMobileAds */; };
+		FDB9229B296EE3890036E091 /* AdMobBannerAdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB9229A296EE3890036E091 /* AdMobBannerAdViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +85,7 @@
 		FDAE3105296C72F7006252EF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		FDAE3107296C72F9006252EF /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		FDAE3108296C747D006252EF /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = iXland/Info.plist; sourceTree = "<group>"; };
+		FDB9229A296EE3890036E091 /* AdMobBannerAdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdMobBannerAdViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +93,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FDB92297296EDB6A0036E091 /* GoogleMobileAds in Frameworks */,
+				FDB92294296ED7B10036E091 /* Alamofire in Frameworks */,
 				FDAE310C296D61DF006252EF /* ImagePickerView in Frameworks */,
 				FDAE30FB296C4F12006252EF /* CodeScanner in Frameworks */,
 				FDAE3101296C6241006252EF /* AlertToast in Frameworks */,
@@ -164,6 +170,7 @@
 				FD254FD2296BFB0400B26C82 /* Extensions.swift */,
 				FDAE30FD296C5C4B006252EF /* Errors.swift */,
 				FD979F9F296EBBFF00011B72 /* GlobalState.swift */,
+				FDB9229A296EE3890036E091 /* AdMobBannerAdViewController.swift */,
 			);
 			path = iXland;
 			sourceTree = "<group>";
@@ -223,6 +230,8 @@
 				FDAE3100296C6241006252EF /* AlertToast */,
 				FDAE310B296D61DF006252EF /* ImagePickerView */,
 				FDAE310E296D62C5006252EF /* ZXingObjC */,
+				FDB92293296ED7B10036E091 /* Alamofire */,
+				FDB92296296EDB6A0036E091 /* GoogleMobileAds */,
 			);
 			productName = iXland;
 			productReference = FD8E4E812960A27F0091782A /* iXland.app */;
@@ -301,6 +310,8 @@
 				FDAE30FF296C6241006252EF /* XCRemoteSwiftPackageReference "AlertToast" */,
 				FDAE310A296D61DF006252EF /* XCRemoteSwiftPackageReference "ImagePickerView" */,
 				FDAE310D296D62C5006252EF /* XCRemoteSwiftPackageReference "zxingify-objc" */,
+				FDB92292296ED7B10036E091 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				FDB92295296EDB6A0036E091 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
 			);
 			productRefGroup = FD8E4E822960A27F0091782A /* Products */;
 			projectDirPath = "";
@@ -356,6 +367,7 @@
 				FD254FCF296BE27900B26C82 /* Constants.swift in Sources */,
 				FD8E4E872960A27F0091782A /* ContentView.swift in Sources */,
 				FD254FD3296BFB0400B26C82 /* Extensions.swift in Sources */,
+				FDB9229B296EE3890036E091 /* AdMobBannerAdViewController.swift in Sources */,
 				FD8E4E852960A27F0091782A /* iXlandApp.swift in Sources */,
 				FD254FD1296BED5D00B26C82 /* Helpers.swift in Sources */,
 				FD93D05B2966B0E700279A30 /* ForumGroup.swift in Sources */,
@@ -472,6 +484,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -525,6 +538,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -558,6 +572,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.boris1993.iXland;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -595,6 +610,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.boris1993.iXland;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -756,6 +772,22 @@
 				minimumVersion = 3.0.0;
 			};
 		};
+		FDB92292296ED7B10036E091 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		FDB92295296EDB6A0036E091 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/googleads/swift-package-manager-google-mobile-ads.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -778,6 +810,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = FDAE310D296D62C5006252EF /* XCRemoteSwiftPackageReference "zxingify-objc" */;
 			productName = ZXingObjC;
+		};
+		FDB92293296ED7B10036E091 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FDB92292296ED7B10036E091 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		FDB92296296EDB6A0036E091 /* GoogleMobileAds */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FDB92295296EDB6A0036E091 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
+			productName = GoogleMobileAds;
 		};
 /* End XCSwiftPackageProductDependency section */
 

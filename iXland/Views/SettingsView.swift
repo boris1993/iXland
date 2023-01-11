@@ -7,6 +7,14 @@ import AlertToast
 struct SettingsView: View {
     let logger = LoggerHelper.getLoggerForView(name: "SettingsView")
     
+#if DEBUG
+    // Test Ad Units
+    // https://developers.google.com/admob/ios/test-ads#demo_ad_units
+    private let adUnitId = "ca-app-pub-3940256099942544/2934735716"
+#else
+    private let adUnitId = "ca-app-pub-1056823357231661/5419266498"
+#endif
+    
     private let jsonDecoder = JSONDecoder()
     private let persistenceController = PersistenceController.shared
     
@@ -115,6 +123,8 @@ struct SettingsView: View {
                     }
                 }
             }
+            
+            SwiftUIBannerAd(adPosition: .bottom, adUnitId: adUnitId)
         }
         .navigationViewStyle(.stack)
         .onAppear() {
@@ -123,7 +133,6 @@ struct SettingsView: View {
             
             themePickerSelectedValue = Themes(rawValue: selectedTheme)!
             
-//            let currentSelectedCookie = try? UserDefaultsHelper.getCurrentCookie()
             logger.debug("Current cookie: \(globalState.currentSelectedCookie)")
         }
         .toast(isPresenting: $isErrorToastShowing) {
