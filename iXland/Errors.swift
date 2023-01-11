@@ -8,7 +8,9 @@ extension AppError: LocalizedError {
     public var errorDescription: String? {
         switch self {
         case .InvalidQrCodeResultCount(rawData: let rawData):
-            return String(format: NSLocalizedString("msgInvalidCookieQrCode", comment: ""), NSLocalizedString(rawData, comment: ""))
+            return String(
+                format: NSLocalizedString("msgInvalidCookieQrCode", comment: ""),
+                NSLocalizedString(rawData, comment: ""))
         }
     }
 }

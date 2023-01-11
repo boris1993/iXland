@@ -29,7 +29,7 @@ struct Forum: Codable {
     var createdAt: String
     var updateAt: String
     var status: String
-    
+
     private enum CodingKeys: String, CodingKey {
         case id
         case fGroup

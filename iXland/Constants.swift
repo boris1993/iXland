@@ -1,5 +1,5 @@
 struct Constants {
-    static let GITHUB_REPO_ADDRESS = "https://github.com/boris1993/iXland";
+    static let GITHUB_REPO_ADDRESS = "https://github.com/boris1993/iXland"
 }
 
 struct UserDefaultsKey {
@@ -10,6 +10,6 @@ struct UserDefaultsKey {
 }
 
 enum Themes: String {
-    case dark = "dark"
-    case light = "light"
+    case dark
+    case light
 }
