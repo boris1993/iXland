@@ -22,7 +22,17 @@ struct ContentView: View {
     }
 
     var body: some View {
-        TabView(selection: $selectedTab) {
+        TabView(selection: .init(
+            get: {
+                selectedTab
+            },
+            set: { newTab in
+                selectedTab = newTab
+                
+                if (globalState.isHapticFeedbackEnabled) {
+                    HapticsHelper.playHapticFeedback()
+                }
+            })) {
             TimelineView()
                 .tabItem {
                     Image(systemName: "calendar.day.timeline.left")

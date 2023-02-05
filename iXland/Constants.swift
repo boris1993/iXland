@@ -13,3 +13,9 @@ enum Themes: String {
     case dark
     case light
 }
+
+struct XdnmbAPI {
+    static let BASE_URL = "https://www.nmbxd1.com"
+    static let GET_TIMELINE_LIST = "\(BASE_URL)/Api/getTimelineList"
+    static let GET_FORUM_LIST = "\(BASE_URL)/Api/getForumList"
+}

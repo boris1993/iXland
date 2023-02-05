@@ -98,6 +98,15 @@ struct SettingsView: View {
                         .buttonStyle(.borderless)
                     }
 
+                    HStack {
+                        Toggle(isOn: $globalState.isHapticFeedbackEnabled) {
+                            Text("HapticFeedback")
+                        }
+                        .onChange(of: globalState.isHapticFeedbackEnabled) {newValue in
+                            UserDefaultsHelper.setIsHapticFeedbackEnabled(isHapticFeedbackEnabled: newValue)
+                        }
+                    }
+
                     NavigationLink(destination: CookieListView(globalState: globalState)) {
                         Text("CookieList")
                     }

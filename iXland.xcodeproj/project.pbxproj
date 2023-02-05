@@ -16,6 +16,8 @@
 		FD254FCF296BE27900B26C82 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD254FCE296BE27900B26C82 /* Constants.swift */; };
 		FD254FD1296BED5D00B26C82 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD254FD0296BED5D00B26C82 /* Helpers.swift */; };
 		FD254FD3296BFB0400B26C82 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD254FD2296BFB0400B26C82 /* Extensions.swift */; };
+		FD43E72C29798E4D00B2178B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FD43E72E29798E4D00B2178B /* InfoPlist.strings */; };
+		FD43E7322979914800B2178B /* ZXingObjC in Frameworks */ = {isa = PBXBuildFile; productRef = FD43E7312979914800B2178B /* ZXingObjC */; };
 		FD8E4E852960A27F0091782A /* iXlandApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8E4E842960A27F0091782A /* iXlandApp.swift */; };
 		FD8E4E872960A27F0091782A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8E4E862960A27F0091782A /* ContentView.swift */; };
 		FD8E4E892960A2800091782A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD8E4E882960A2800091782A /* Assets.xcassets */; };
@@ -66,6 +68,8 @@
 		FD254FCE296BE27900B26C82 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		FD254FD0296BED5D00B26C82 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		FD254FD2296BFB0400B26C82 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		FD43E72D29798E4D00B2178B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		FD43E72F29798E5100B2178B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		FD8E4E812960A27F0091782A /* iXland.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iXland.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD8E4E842960A27F0091782A /* iXlandApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iXlandApp.swift; sourceTree = "<group>"; };
 		FD8E4E862960A27F0091782A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -82,8 +86,6 @@
 		FD979F9F296EBBFF00011B72 /* GlobalState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalState.swift; sourceTree = "<group>"; };
 		FDAE30F7296C4DEE006252EF /* AnoBbsCookie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnoBbsCookie.swift; sourceTree = "<group>"; };
 		FDAE30FD296C5C4B006252EF /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
-		FDAE3105296C72F7006252EF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		FDAE3107296C72F9006252EF /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		FDAE3108296C747D006252EF /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = iXland/Info.plist; sourceTree = "<group>"; };
 		FDB9229A296EE3890036E091 /* AdMobBannerAdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdMobBannerAdViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -106,6 +108,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD43E7322979914800B2178B /* ZXingObjC in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -119,6 +122,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FD077F2629799A25000836B2 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		FD254FBC296B169C00B26C82 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -131,15 +141,23 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		FD43E7302979914200B2178B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		FD8E4E782960A27F0091782A = {
 			isa = PBXGroup;
 			children = (
 				FDAE3108296C747D006252EF /* Info.plist */,
-				FDAE3106296C72F7006252EF /* InfoPlist.strings */,
+				FD43E72E29798E4D00B2178B /* InfoPlist.strings */,
 				FD8E4E832960A27F0091782A /* iXland */,
 				FD8E4E9A2960A2800091782A /* iXlandTests */,
 				FD8E4EA42960A2800091782A /* iXlandUITests */,
 				FD8E4E822960A27F0091782A /* Products */,
+				FD43E7302979914200B2178B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -186,6 +204,7 @@
 		FD8E4E9A2960A2800091782A /* iXlandTests */ = {
 			isa = PBXGroup;
 			children = (
+				FD077F2629799A25000836B2 /* Resources */,
 				FD8E4E9B2960A2800091782A /* iXlandTests.swift */,
 			);
 			path = iXlandTests;
@@ -251,6 +270,9 @@
 				FD8E4E992960A2800091782A /* PBXTargetDependency */,
 			);
 			name = iXlandTests;
+			packageProductDependencies = (
+				FD43E7312979914800B2178B /* ZXingObjC */,
+			);
 			productName = iXlandTests;
 			productReference = FD8E4E972960A2800091782A /* iXlandTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -330,6 +352,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FD8E4E8C2960A2800091782A /* Preview Assets.xcassets in Resources */,
+				FD43E72C29798E4D00B2178B /* InfoPlist.strings in Resources */,
 				FD254FC5296B233000B26C82 /* Localizable.strings in Resources */,
 				FD8E4E892960A2800091782A /* Assets.xcassets in Resources */,
 			);
@@ -418,11 +441,11 @@
 			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
-		FDAE3106296C72F7006252EF /* InfoPlist.strings */ = {
+		FD43E72E29798E4D00B2178B /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				FDAE3105296C72F7006252EF /* en */,
-				FDAE3107296C72F9006252EF /* zh-Hans */,
+				FD43E72D29798E4D00B2178B /* en */,
+				FD43E72F29798E5100B2178B /* zh-Hans */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -580,7 +603,7 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -618,7 +641,7 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -631,10 +654,13 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7X6JJBWX93;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.boris1993.iXlandTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -651,10 +677,13 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7X6JJBWX93;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.boris1993.iXlandTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -673,6 +702,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.boris1993.iXlandUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -691,6 +723,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.boris1993.iXlandUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -791,6 +826,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		FD43E7312979914800B2178B /* ZXingObjC */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FDAE310D296D62C5006252EF /* XCRemoteSwiftPackageReference "zxingify-objc" */;
+			productName = ZXingObjC;
+		};
 		FDAE30FA296C4F12006252EF /* CodeScanner */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = FDAE30F9296C4F12006252EF /* XCRemoteSwiftPackageReference "CodeScanner" */;

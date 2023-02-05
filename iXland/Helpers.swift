@@ -65,12 +65,20 @@ class UserDefaultsHelper {
         return cookie
     }
 
-    static func setCurrentCookie(currentCookieName: String) throws {
+    static func setCurrentCookie(currentCookieName: String) {
         userDefaults.set(currentCookieName, forKey: UserDefaultsKey.CURRENT_COOKIE)
     }
 
     static func removeCurrentCookie() {
         userDefaults.removeObject(forKey: UserDefaultsKey.CURRENT_COOKIE)
+    }
+
+    static func getIsHapticFeedbackEnabled() -> Bool {
+        return userDefaults.bool(forKey: UserDefaultsKey.HAPTIC_FEEDBACK)
+    }
+
+    static func setIsHapticFeedbackEnabled(isHapticFeedbackEnabled: Bool) {
+        userDefaults.set(isHapticFeedbackEnabled, forKey: UserDefaultsKey.HAPTIC_FEEDBACK)
     }
 }
 

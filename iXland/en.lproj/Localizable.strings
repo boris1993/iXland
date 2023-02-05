@@ -5,7 +5,7 @@
 "CookieList" = "Cookies";
 
 "fieldTitleTheme" = "Theme";
-"fieldTitleHapticFeedback" = "Haptic feedback";
+"HapticFeedback" = "Haptic feedback";
 "fieldTitleSubscriptionId" = "Subscription ID";
 "fieldTitleViewInGitHub" = "View In GitHub";
 

@@ -6,8 +6,9 @@ import AlertToast
 
 struct CookieListView: View {
     private let logger = LoggerHelper.getLoggerForView(name: "SettingsView")
-    private let persistenceController = PersistenceController.shared
     private let jsonDecoder = JSONDecoder()
+    
+    private let persistenceController: PersistenceController
 
     @FetchRequest(
         entity: Cookie.entity(),
@@ -31,6 +32,18 @@ struct CookieListView: View {
     @State
     private var errorMessage: String = ""
 
+    init(globalState: GlobalState) {
+        self.globalState = globalState
+        self.persistenceController = PersistenceController.shared
+    }
+
+    init(
+        globalState: GlobalState,
+        persistenceController: PersistenceController) {
+            self.globalState = globalState
+            self.persistenceController = persistenceController
+    }
+
     var body: some View {
         NavigationStack {
             List {
@@ -39,12 +52,7 @@ struct CookieListView: View {
                         globalState.currentSelectedCookie = cookie
                         logger.debug("globalState.currentSelectedCookie = \(globalState.currentSelectedCookie)")
 
-                        do {
-                            try UserDefaultsHelper.setCurrentCookie(currentCookieName: cookie.name!)
-                        } catch {
-                            errorMessage = error.localizedDescription
-                            isErrorToastShowing = true
-                        }
+                        UserDefaultsHelper.setCurrentCookie(currentCookieName: cookie.name!)
                     } label: {
                         Text(cookie.name!)
                             .fontWeight(globalState.currentSelectedCookie == cookie ? .bold : .regular)

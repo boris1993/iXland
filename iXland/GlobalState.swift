@@ -7,4 +7,7 @@ final class GlobalState: ObservableObject {
 
     @Published
     var subscriptionId: String = UserDefaultsHelper.getSubscriptionId()
+
+    @Published
+    var isHapticFeedbackEnabled: Bool = UserDefaultsHelper.getIsHapticFeedbackEnabled()
 }

@@ -5,7 +5,7 @@
 "CookieList" = "饼干列表";
 
 "fieldTitleTheme" = "主题";
-"fieldTitleHapticFeedback" = "震动反馈";
+"HapticFeedback" = "震动反馈";
 "fieldTitleSubscriptionId" = "订阅ID";
 "fieldTitleViewInGitHub" = "在GitHub查看";
 
