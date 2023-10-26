@@ -99,7 +99,9 @@ struct SettingsView: View {
                             Text("HapticFeedback")
                         }
                     }
+                }
 
+                Section {
                     NavigationLink(destination: CookieListView(globalState: globalState)) {
                         Text("CookieList")
                     }
@@ -120,7 +122,8 @@ struct SettingsView: View {
                     }
                 }
             }
-
+        }
+        .safeAreaInset(edge: .bottom) {
             SwiftUIBannerAd(adPosition: .bottom, adUnitId: adUnitId)
         }
         .navigationViewStyle(.stack)
