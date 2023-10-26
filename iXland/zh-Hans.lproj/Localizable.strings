@@ -17,6 +17,7 @@
 "buttonAddCookie" = "添加饼干";
 "buttonScanQRCode" = "扫描二维码";
 "buttonImportFromPhotos" = "从图库导入";
+"buttonCancel" = "取消";
 
 "placeholderEmptySubIdNotification" = "空订阅ID也是有效的订阅ID";
 

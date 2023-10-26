@@ -17,6 +17,7 @@
 "buttonAddCookie" = "Add a cookie";
 "buttonScanQRCode" = "Scan QR code";
 "buttonImportFromPhotos" = "Import from photos";
+"buttonCancel" = "Cancel";
 
 "placeholderEmptySubIdNotification" = "The empty subscription ID is also valid";
 

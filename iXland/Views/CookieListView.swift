@@ -79,9 +79,29 @@ struct CookieListView: View {
                         Image(systemName: "plus")
                     }
                     .sheet(isPresented: $isQrCodeScannerShowing) {
-                        CodeScannerView(
-                            codeTypes: [.qr],
-                            completion: handleQrCodeScan(result:))
+                        NavigationStack {
+                            VStack {
+                                CodeScannerView(
+                                    codeTypes: [.qr],
+                                    completion: handleQrCodeScan(result:)
+                                )
+                                .overlay(
+                                    Rectangle()
+                                        .stroke(
+                                            Color.yellow,
+                                            style: StrokeStyle(
+                                                lineWidth: 5,
+                                                lineCap: .round,
+                                                lineJoin: .bevel,
+                                                dash: [60, 215],
+                                                dashPhase: 29
+                                            )
+                                        )
+                                        .frame(width: 275, height: 275)
+                                )
+                            }
+                            .navigationBarItems(leading: Button("buttonCancel", action: {isQrCodeScannerShowing = false}))
+                        }
                     }
                     .sheet(isPresented: $isPhotoPickerShowing) {
                         ImagePickerView(sourceType: .photoLibrary) { image in
