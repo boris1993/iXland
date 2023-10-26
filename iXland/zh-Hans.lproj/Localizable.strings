@@ -8,6 +8,7 @@
 "HapticFeedback" = "震动反馈";
 "fieldTitleSubscriptionId" = "订阅ID";
 "fieldTitleViewInGitHub" = "在GitHub查看";
+"fieldCurrentSelectedCookie" = "当前选择的饼干";
 
 "themeAuto" = "跟随系统";
 "themeDark" = "深色";

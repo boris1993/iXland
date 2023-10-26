@@ -8,6 +8,7 @@
 "HapticFeedback" = "Haptic feedback";
 "fieldTitleSubscriptionId" = "Subscription ID";
 "fieldTitleViewInGitHub" = "View In GitHub";
+"fieldCurrentSelectedCookie" = "Current cookie";
 
 "themeAuto" = "Auto";
 "themeDark" = "Dark";

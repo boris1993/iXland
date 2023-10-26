@@ -103,6 +103,12 @@ struct SettingsView: View {
                     NavigationLink(destination: CookieListView(globalState: globalState)) {
                         Text("CookieList")
                     }
+
+                    HStack {
+                        Text("fieldCurrentSelectedCookie")
+                        Spacer()
+                        Text(globalState.currentSelectedCookie?.name ?? "")
+                    }
                 }
 
                 // MARK: 关于
