@@ -5,17 +5,20 @@ struct ContentView: View {
     private let logger = LoggerHelper.getLoggerForView(name: "ContentView")
     private let persistenceController = PersistenceController.shared
 
-    @Environment(\.managedObjectContext)
-    var managedObjectContext
-
-    @Environment(\.colorScheme)
-    var systemColorScheme
-
     @StateObject
     var globalState = GlobalState()
 
+    @Environment(\.managedObjectContext)
+    private var managedObjectContext
+
+    @Environment(\.colorScheme)
+    private var systemColorScheme
+
     @State
     private var selectedTab = Tab.Timeline
+
+    @AppStorage(UserDefaultsKey.THEME)
+    private var themePickerSelectedValue: Themes = Themes.dark
 
     private enum Tab: String {
         case Timeline, Forums, Favourites, Settings
@@ -28,10 +31,7 @@ struct ContentView: View {
             },
             set: { newTab in
                 selectedTab = newTab
-                
-                if (globalState.isHapticFeedbackEnabled) {
-                    HapticsHelper.playHapticFeedback()
-                }
+                HapticsHelper.playHapticFeedback()
             })) {
             TimelineView()
                 .tabItem {
@@ -59,12 +59,9 @@ struct ContentView: View {
                 .tag(Tab.Settings)
         }
         .onAppear {
-            let selectedTheme = UserDefaultsHelper.getSelectedTheme()
-
-            if selectedTheme != nil {
-                let appTheme = Themes(rawValue: selectedTheme!)
-                ThemeHelper.setAppTheme(themePickerSelectedValue: appTheme!)
-            }
+            let selectedTheme = themePickerSelectedValue.rawValue
+            let appTheme = Themes(rawValue: selectedTheme)
+            ThemeHelper.setAppTheme(themePickerSelectedValue: appTheme!)
         }
     }
 }

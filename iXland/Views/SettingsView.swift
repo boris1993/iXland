@@ -15,17 +15,14 @@ struct SettingsView: View {
     private let adUnitId = "ca-app-pub-1056823357231661/5419266498"
 #endif
 
+    @ObservedObject
+    var globalState: GlobalState
+
     private let jsonDecoder = JSONDecoder()
     private let persistenceController = PersistenceController.shared
 
     @Environment(\.managedObjectContext)
     private var managedObjectContext
-
-    @Environment(\.colorScheme)
-    private var systemColorScheme
-
-    @ObservedObject
-    var globalState: GlobalState
 
     @FetchRequest(
         entity: Cookie.entity(),
@@ -33,12 +30,6 @@ struct SettingsView: View {
         animation: .default
     )
     private var cookies: FetchedResults<Cookie>
-
-    @State
-    private var subscriptionId: String = UserDefaultsHelper.getSubscriptionId()
-
-    @State
-    private var themePickerSelectedValue: Themes = Themes.dark
 
     @State
     private var isQrCodeScannerShowing = false
@@ -55,6 +46,15 @@ struct SettingsView: View {
     @State
     private var errorMessage: String = ""
 
+    @AppStorage(UserDefaultsKey.THEME)
+    private var themePickerSelectedValue: Themes = Themes.dark
+
+    @AppStorage(UserDefaultsKey.HAPTIC_FEEDBACK)
+    private var hapticFeedbackEnabled: Bool = false
+
+    @AppStorage(UserDefaultsKey.SUBSCRIPTION_ID)
+    private var subscriptionId: String = ""
+
     var body: some View {
         NavigationStack {
             List {
@@ -70,7 +70,6 @@ struct SettingsView: View {
                                 Text("themeLight").tag(Themes.light)
                             }
                             .onChange(of: themePickerSelectedValue) { _ in
-                                UserDefaultsHelper.setSelectedTheme(theme: themePickerSelectedValue.rawValue)
                                 ThemeHelper.setAppTheme(themePickerSelectedValue: themePickerSelectedValue)
                             }
                             .pickerStyle(.segmented)
@@ -85,9 +84,6 @@ struct SettingsView: View {
                             .disableAutocorrection(true)
                             .multilineTextAlignment(.trailing)
                             .keyboardType(.asciiCapable)
-                            .onChange(of: subscriptionId, perform: { _ in
-                                updateSubscriptionId()
-                            })
                         Button(
                             action: {
                                 generateNewSubscriptionId()
@@ -99,11 +95,8 @@ struct SettingsView: View {
                     }
 
                     HStack {
-                        Toggle(isOn: $globalState.isHapticFeedbackEnabled) {
+                        Toggle(isOn: $hapticFeedbackEnabled) {
                             Text("HapticFeedback")
-                        }
-                        .onChange(of: globalState.isHapticFeedbackEnabled) {newValue in
-                            UserDefaultsHelper.setIsHapticFeedbackEnabled(isHapticFeedbackEnabled: newValue)
                         }
                     }
 
@@ -126,9 +119,7 @@ struct SettingsView: View {
         }
         .navigationViewStyle(.stack)
         .onAppear {
-            let selectedTheme = UserDefaultsHelper.getSelectedTheme() ??
-            (systemColorScheme == .dark ? Themes.dark.rawValue : Themes.light.rawValue)
-
+            let selectedTheme = themePickerSelectedValue.rawValue
             themePickerSelectedValue = Themes(rawValue: selectedTheme)!
 
             logger.debug("Current cookie: \(globalState.currentSelectedCookie)")
@@ -140,11 +131,6 @@ struct SettingsView: View {
 
     private func generateNewSubscriptionId() {
         self.subscriptionId = UUID().uuidString
-        updateSubscriptionId()
-    }
-
-    private func updateSubscriptionId() {
-        UserDefaultsHelper.setSubscriptionId(subscriptionId: self.subscriptionId)
     }
 
     private func showErrorToast(message: String) {

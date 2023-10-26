@@ -38,6 +38,7 @@
 		FDB92294296ED7B10036E091 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = FDB92293296ED7B10036E091 /* Alamofire */; };
 		FDB92297296EDB6A0036E091 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = FDB92296296EDB6A0036E091 /* GoogleMobileAds */; };
 		FDB9229B296EE3890036E091 /* AdMobBannerAdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB9229A296EE3890036E091 /* AdMobBannerAdViewController.swift */; };
+		FDC8C8FD2AEAAC7C0035E502 /* test-cookie.png in Resources */ = {isa = PBXBuildFile; fileRef = FDC8C8FC2AEAAC7C0035E502 /* test-cookie.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +89,7 @@
 		FDAE30FD296C5C4B006252EF /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		FDAE3108296C747D006252EF /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = iXland/Info.plist; sourceTree = "<group>"; };
 		FDB9229A296EE3890036E091 /* AdMobBannerAdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdMobBannerAdViewController.swift; sourceTree = "<group>"; };
+		FDC8C8FC2AEAAC7C0035E502 /* test-cookie.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "test-cookie.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +127,7 @@
 		FD077F2629799A25000836B2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				FDC8C8FC2AEAAC7C0035E502 /* test-cookie.png */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -362,6 +365,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FDC8C8FD2AEAAC7C0035E502 /* test-cookie.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

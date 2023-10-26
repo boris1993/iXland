@@ -38,22 +38,6 @@ class ThemeHelper {
 class UserDefaultsHelper {
     private static var userDefaults = UserDefaults.standard
 
-    static func getSelectedTheme() -> String? {
-        return userDefaults.string(forKey: UserDefaultsKey.THEME)
-    }
-
-    static func setSelectedTheme(theme: String) {
-        userDefaults.set(theme, forKey: UserDefaultsKey.THEME)
-    }
-
-    static func getSubscriptionId() -> String {
-        return userDefaults.string(forKey: UserDefaultsKey.SUBSCRIPTION_ID) ?? ""
-    }
-
-    static func setSubscriptionId(subscriptionId: String) {
-        userDefaults.set(subscriptionId, forKey: UserDefaultsKey.SUBSCRIPTION_ID)
-    }
-
     static func getCurrentCookie() throws -> Cookie? {
         let cookieName = userDefaults.string(forKey: UserDefaultsKey.CURRENT_COOKIE)
         if cookieName == nil {
@@ -72,18 +56,15 @@ class UserDefaultsHelper {
     static func removeCurrentCookie() {
         userDefaults.removeObject(forKey: UserDefaultsKey.CURRENT_COOKIE)
     }
-
-    static func getIsHapticFeedbackEnabled() -> Bool {
-        return userDefaults.bool(forKey: UserDefaultsKey.HAPTIC_FEEDBACK)
-    }
-
-    static func setIsHapticFeedbackEnabled(isHapticFeedbackEnabled: Bool) {
-        userDefaults.set(isHapticFeedbackEnabled, forKey: UserDefaultsKey.HAPTIC_FEEDBACK)
-    }
 }
 
 class HapticsHelper {
+    @AppStorage(UserDefaultsKey.HAPTIC_FEEDBACK)
+    static var hapticFeedbackEnabled: Bool = false
+
     static func playHapticFeedback() {
-        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+        if (hapticFeedbackEnabled) {
+            UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+        }
     }
 }
