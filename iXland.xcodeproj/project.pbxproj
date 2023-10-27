@@ -151,6 +151,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		FD43FA932AEC0A1400A5EEBE /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				FDB9229A296EE3890036E091 /* AdMobBannerAdViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
 		FD8E4E782960A27F0091782A = {
 			isa = PBXGroup;
 			children = (
@@ -177,6 +185,7 @@
 		FD8E4E832960A27F0091782A /* iXland */ = {
 			isa = PBXGroup;
 			children = (
+				FD43FA932AEC0A1400A5EEBE /* ViewControllers */,
 				FD254FBC296B169C00B26C82 /* Views */,
 				FD93D0592966B08D00279A30 /* Models */,
 				FD8E4E842960A27F0091782A /* iXlandApp.swift */,
@@ -191,7 +200,6 @@
 				FD254FD2296BFB0400B26C82 /* Extensions.swift */,
 				FDAE30FD296C5C4B006252EF /* Errors.swift */,
 				FD979F9F296EBBFF00011B72 /* GlobalState.swift */,
-				FDB9229A296EE3890036E091 /* AdMobBannerAdViewController.swift */,
 			);
 			path = iXland;
 			sourceTree = "<group>";
