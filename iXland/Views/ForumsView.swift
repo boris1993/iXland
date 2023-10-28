@@ -1,4 +1,5 @@
 import SwiftUI
+import AlertToast
 
 struct ForumsView: View {
     private let logger = LoggerHelper.getLoggerForView(name: "ContentView")
@@ -15,6 +16,12 @@ struct ForumsView: View {
 
     @Environment(\.colorScheme)
     private var systemColorScheme
+
+    @State
+    private var isErrorToastShowing = false
+
+    @State
+    private var errorMessage: String = ""
 
     @State
     private var isContentLoaded = false
@@ -45,14 +52,26 @@ struct ForumsView: View {
         .onAppear {
             if (!isContentLoaded) {
                 globalState.loadingStatus = String(localized: "msgLoadingForumList");
+                shouldDisplayProgressView = true;
 
                 AnoBbsApiClient.loadForumGroups { forumGroups in
                     self.forumGroups = forumGroups
                     isContentLoaded = true
                     shouldDisplayProgressView = false;
+                } failure: { error in
+                    showErrorToast(message: error)
+                    shouldDisplayProgressView = false;
                 }
             }
         }
+        .toast(isPresenting: $isErrorToastShowing) {
+            AlertToast(type: .regular, title: errorMessage)
+        }
+    }
+
+    private func showErrorToast(message: String) {
+        errorMessage = message
+        isErrorToastShowing = true
     }
 }
 

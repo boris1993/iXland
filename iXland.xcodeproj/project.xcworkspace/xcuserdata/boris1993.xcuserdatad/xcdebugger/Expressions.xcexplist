@@ -11,6 +11,22 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "static AnoBbsApiClient.loadForumGroups(completion:):AnoBbsApiClient.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "response">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #2 in static AnoBbsApiClient.loadForumGroups(completion:failure:):AnoBbsApiClient.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "error.localizedDescription">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "closure #1 in static AnoBbsApiClient.loadForumGroups(completion:):AnoBbsApiClient.swift">
          <PersistentStrings>
             <PersistentString
@@ -18,14 +34,6 @@
             </PersistentString>
             <PersistentString
                value = "response.value">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "static AnoBbsApiClient.loadForumGroups(completion:):AnoBbsApiClient.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "response">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
