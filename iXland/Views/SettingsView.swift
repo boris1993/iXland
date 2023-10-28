@@ -15,11 +15,11 @@ struct SettingsView: View {
     private let adUnitId = "ca-app-pub-1056823357231661/5419266498"
 #endif
 
-    @ObservedObject
-    var globalState: GlobalState
-
     private let jsonDecoder = JSONDecoder()
     private let persistenceController = PersistenceController.shared
+
+    @ObservedObject
+    var globalState: GlobalState
 
     @Environment(\.managedObjectContext)
     private var managedObjectContext

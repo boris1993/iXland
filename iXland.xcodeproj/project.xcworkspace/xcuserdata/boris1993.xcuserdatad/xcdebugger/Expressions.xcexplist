@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "CookieListView.handleDecodeQrCodeFromPicture(uiImage:):CookieListView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "features[0]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in static AnoBbsApiClient.loadForumGroups(completion:):AnoBbsApiClient.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "response.error?.localizedDescription">
+            </PersistentString>
+            <PersistentString
+               value = "response.value">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "static AnoBbsApiClient.loadForumGroups(completion:):AnoBbsApiClient.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "response">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

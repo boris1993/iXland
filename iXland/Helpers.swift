@@ -16,6 +16,13 @@ class LoggerHelper {
             category: "persistence"
         )
     }
+
+    static func getLoggerForNetworkRequest(name: String) -> Logger {
+        return Logger(
+            subsystem: name,
+            category: "network"
+        )
+    }
 }
 
 class ThemeHelper {

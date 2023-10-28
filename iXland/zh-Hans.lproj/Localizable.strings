@@ -24,3 +24,4 @@
 "msgInvalidCookieQrCode" = "添加饼干所用的二维码无效";
 "msgCookieAlreadyImported" = "这个饼干已经被导入了";
 "msgFailedToCreateZXMultiFormatReader" = "创建ZXMultiFormatReader失败";
+"msgLoadingForumList" = "正在加载板块列表";

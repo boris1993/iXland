@@ -18,6 +18,7 @@
 		FD254FD3296BFB0400B26C82 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD254FD2296BFB0400B26C82 /* Extensions.swift */; };
 		FD43E72C29798E4D00B2178B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FD43E72E29798E4D00B2178B /* InfoPlist.strings */; };
 		FD43E7322979914800B2178B /* ZXingObjC in Frameworks */ = {isa = PBXBuildFile; productRef = FD43E7312979914800B2178B /* ZXingObjC */; };
+		FD43FA962AEC0BBC00A5EEBE /* AnoBbsApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD43FA952AEC0BBC00A5EEBE /* AnoBbsApiClient.swift */; };
 		FD8E4E852960A27F0091782A /* iXlandApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8E4E842960A27F0091782A /* iXlandApp.swift */; };
 		FD8E4E872960A27F0091782A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8E4E862960A27F0091782A /* ContentView.swift */; };
 		FD8E4E892960A2800091782A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD8E4E882960A2800091782A /* Assets.xcassets */; };
@@ -71,6 +72,7 @@
 		FD254FD2296BFB0400B26C82 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		FD43E72D29798E4D00B2178B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		FD43E72F29798E5100B2178B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		FD43FA952AEC0BBC00A5EEBE /* AnoBbsApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnoBbsApiClient.swift; sourceTree = "<group>"; };
 		FD8E4E812960A27F0091782A /* iXland.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iXland.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD8E4E842960A27F0091782A /* iXlandApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iXlandApp.swift; sourceTree = "<group>"; };
 		FD8E4E862960A27F0091782A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -159,6 +161,14 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
+		FD43FA942AEC0AF400A5EEBE /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				FD43FA952AEC0BBC00A5EEBE /* AnoBbsApiClient.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		FD8E4E782960A27F0091782A = {
 			isa = PBXGroup;
 			children = (
@@ -185,6 +195,7 @@
 		FD8E4E832960A27F0091782A /* iXland */ = {
 			isa = PBXGroup;
 			children = (
+				FD43FA942AEC0AF400A5EEBE /* Services */,
 				FD43FA932AEC0A1400A5EEBE /* ViewControllers */,
 				FD254FBC296B169C00B26C82 /* Views */,
 				FD93D0592966B08D00279A30 /* Models */,
@@ -399,6 +410,7 @@
 				FD254FC0296B16C900B26C82 /* ForumsView.swift in Sources */,
 				FD254FBE296B16BC00B26C82 /* TimelineView.swift in Sources */,
 				FDAE30FE296C5C4B006252EF /* Errors.swift in Sources */,
+				FD43FA962AEC0BBC00A5EEBE /* AnoBbsApiClient.swift in Sources */,
 				FD254FCF296BE27900B26C82 /* Constants.swift in Sources */,
 				FD8E4E872960A27F0091782A /* ContentView.swift in Sources */,
 				FD254FD3296BFB0400B26C82 /* Extensions.swift in Sources */,

@@ -17,6 +17,9 @@ struct ContentView: View {
     @State
     private var selectedTab = Tab.Timeline
 
+    @State
+    private var shouldDisplayProgressView = true
+
     @AppStorage(UserDefaultsKey.THEME)
     private var themePickerSelectedValue: Themes = Themes.dark
 
@@ -39,7 +42,7 @@ struct ContentView: View {
                     Text("Timeline")
                 }
                 .tag(Tab.Timeline)
-            ForumsView()
+            ForumsView(globalState: globalState, shouldDisplayProgressView: $shouldDisplayProgressView)
                 .tabItem {
                     Image(systemName: "square.stack")
                     Text("Forums")
@@ -57,11 +60,25 @@ struct ContentView: View {
                     Text("Settings")
                 }
                 .tag(Tab.Settings)
+                .onAppear {
+                    shouldDisplayProgressView = false
+                }
         }
         .onAppear {
             let selectedTheme = themePickerSelectedValue.rawValue
             let appTheme = Themes(rawValue: selectedTheme)
             ThemeHelper.setAppTheme(themePickerSelectedValue: appTheme!)
+        }
+        .overlay {
+            if (shouldDisplayProgressView) {
+                ProgressView {
+                    Text(globalState.loadingStatus)
+                }
+                .progressViewStyle(CircularProgressViewStyle())
+                .scaledToFill()
+            } else {
+                EmptyView()
+            }
         }
     }
 }
