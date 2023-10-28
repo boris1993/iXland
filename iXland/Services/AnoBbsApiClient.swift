@@ -5,6 +5,11 @@ import Alamofire
 final class AnoBbsApiClient {
     private static let logger = LoggerHelper.getLoggerForNetworkRequest(name: "AnoBbsApiClient")
 
+    /// 获取版面列表
+    ///
+    /// - Parameters:
+    ///   - completion: 处理返回的`ForumGroup`列表的回调方法
+    ///   - failure: 处理错误信息的回调方法
     public static func loadForumGroups(
         completion:@escaping ([ForumGroup]) -> Void,
         failure:@escaping (String) -> Void
