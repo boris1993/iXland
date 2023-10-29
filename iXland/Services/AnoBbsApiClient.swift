@@ -48,7 +48,7 @@ final class AnoBbsApiClient {
                 case .success(let data):
                     complete(data)
                 case .failure(let error):
-                    failure(error.localizedDescription)
+                    failure(error.underlyingError?.localizedDescription ?? error.localizedDescription)
                 }
             }
     }

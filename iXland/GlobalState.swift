@@ -10,4 +10,7 @@ final class GlobalState: ObservableObject {
 
     @Published
     var cdnUrl = ""
+
+    @Published
+    var forumIdAndNameDictionary = Dictionary<String, String>()
 }
