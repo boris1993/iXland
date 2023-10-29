@@ -19,6 +19,7 @@
 		FD43E72C29798E4D00B2178B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FD43E72E29798E4D00B2178B /* InfoPlist.strings */; };
 		FD43E7322979914800B2178B /* ZXingObjC in Frameworks */ = {isa = PBXBuildFile; productRef = FD43E7312979914800B2178B /* ZXingObjC */; };
 		FD43FA962AEC0BBC00A5EEBE /* AnoBbsApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD43FA952AEC0BBC00A5EEBE /* AnoBbsApiClient.swift */; };
+		FD43FA982AEE429100A5EEBE /* CdnList.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD43FA972AEE429100A5EEBE /* CdnList.swift */; };
 		FD8E4E852960A27F0091782A /* iXlandApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8E4E842960A27F0091782A /* iXlandApp.swift */; };
 		FD8E4E872960A27F0091782A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8E4E862960A27F0091782A /* ContentView.swift */; };
 		FD8E4E892960A2800091782A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD8E4E882960A2800091782A /* Assets.xcassets */; };
@@ -73,6 +74,7 @@
 		FD43E72D29798E4D00B2178B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		FD43E72F29798E5100B2178B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		FD43FA952AEC0BBC00A5EEBE /* AnoBbsApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnoBbsApiClient.swift; sourceTree = "<group>"; };
+		FD43FA972AEE429100A5EEBE /* CdnList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CdnList.swift; sourceTree = "<group>"; };
 		FD8E4E812960A27F0091782A /* iXland.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iXland.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD8E4E842960A27F0091782A /* iXlandApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iXlandApp.swift; sourceTree = "<group>"; };
 		FD8E4E862960A27F0091782A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -246,6 +248,7 @@
 			children = (
 				FD93D05A2966B0E700279A30 /* ForumGroup.swift */,
 				FDAE30F7296C4DEE006252EF /* AnoBbsCookie.swift */,
+				FD43FA972AEE429100A5EEBE /* CdnList.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -414,6 +417,7 @@
 				FD254FCF296BE27900B26C82 /* Constants.swift in Sources */,
 				FD8E4E872960A27F0091782A /* ContentView.swift in Sources */,
 				FD254FD3296BFB0400B26C82 /* Extensions.swift in Sources */,
+				FD43FA982AEE429100A5EEBE /* CdnList.swift in Sources */,
 				FDB9229B296EE3890036E091 /* AdMobBannerAdViewController.swift in Sources */,
 				FD8E4E852960A27F0091782A /* iXlandApp.swift in Sources */,
 				FD254FD1296BED5D00B26C82 /* Helpers.swift in Sources */,

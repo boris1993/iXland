@@ -18,7 +18,16 @@ struct ContentView: View {
     private var selectedTab = Tab.Timeline
 
     @State
-    private var shouldDisplayProgressView = true
+    private var initialized = false
+
+    @State
+    private var shouldDisplayProgressView = false
+
+    @State
+    private var failedLoadingContent = true
+
+    @State
+    private var errorMessage: [String] = ["aaa", "bbb"]
 
     @AppStorage(UserDefaultsKey.THEME)
     private var themePickerSelectedValue: Themes = Themes.dark
@@ -28,57 +37,100 @@ struct ContentView: View {
     }
 
     var body: some View {
-        TabView(selection: .init(
-            get: {
-                selectedTab
-            },
-            set: { newTab in
-                selectedTab = newTab
-                HapticsHelper.playHapticFeedback()
-            })) {
-            TimelineView()
-                .tabItem {
-                    Image(systemName: "calendar.day.timeline.left")
-                    Text("Timeline")
+        VStack {
+            if (initialized) {
+                TabView(selection: .init(
+                    get: {
+                        selectedTab
+                    },
+                    set: { newTab in
+                        selectedTab = newTab
+                        HapticsHelper.playHapticFeedback()
+                    })) {
+                        TimelineView()
+                            .tabItem {
+                                Image(systemName: "calendar.day.timeline.left")
+                                Text("Timeline")
+                            }
+                            .tag(Tab.Timeline)
+                        ForumsView(globalState: globalState, shouldDisplayProgressView: $shouldDisplayProgressView)
+                            .tabItem {
+                                Image(systemName: "square.stack")
+                                Text("Forums")
+                            }
+                            .tag(Tab.Forums)
+                        FavouritesView()
+                            .tabItem {
+                                Image(systemName: "star")
+                                Text("Favourites")
+                            }
+                            .tag(Tab.Favourites)
+                        SettingsView(globalState: globalState)
+                            .tabItem {
+                                Image(systemName: "gear")
+                                Text("Settings")
+                            }
+                            .tag(Tab.Settings)
+                            .onAppear {
+                                shouldDisplayProgressView = false
+                            }
+                    }
+                    .onAppear {
+                        let selectedTheme = themePickerSelectedValue.rawValue
+                        let appTheme = Themes(rawValue: selectedTheme)
+                        ThemeHelper.setAppTheme(themePickerSelectedValue: appTheme!)
+                    }
+                    .overlay {
+                        if (shouldDisplayProgressView) {
+                            ProgressView {
+                                Text(globalState.loadingStatus)
+                            }
+                            .progressViewStyle(CircularProgressViewStyle())
+                            .scaledToFill()
+                        } else {
+                            EmptyView()
+                        }
+                    }
+            } else if (failedLoadingContent) {
+                VStack {
+                    Text("msgFailedLoadingForumList")
+                    Text(errorMessage.joined(separator: "\n"))
+                    Text("msgTapToRetry")
                 }
-                .tag(Tab.Timeline)
-            ForumsView(globalState: globalState, shouldDisplayProgressView: $shouldDisplayProgressView)
-                .tabItem {
-                    Image(systemName: "square.stack")
-                    Text("Forums")
+                .onTapGesture {
+                    failedLoadingContent = false
+                    errorMessage = []
+                    initialize()
                 }
-                .tag(Tab.Forums)
-            FavouritesView()
-                .tabItem {
-                    Image(systemName: "star")
-                    Text("Favourites")
-                }
-                .tag(Tab.Favourites)
-            SettingsView(globalState: globalState)
-                .tabItem {
-                    Image(systemName: "gear")
-                    Text("Settings")
-                }
-                .tag(Tab.Settings)
-                .onAppear {
-                    shouldDisplayProgressView = false
-                }
+            }
         }
         .onAppear {
-            let selectedTheme = themePickerSelectedValue.rawValue
-            let appTheme = Themes(rawValue: selectedTheme)
-            ThemeHelper.setAppTheme(themePickerSelectedValue: appTheme!)
+            initialize()
         }
         .overlay {
-            if (shouldDisplayProgressView) {
+            if (!initialized && !failedLoadingContent) {
                 ProgressView {
                     Text(globalState.loadingStatus)
                 }
                 .progressViewStyle(CircularProgressViewStyle())
                 .scaledToFill()
-            } else {
-                EmptyView()
             }
+        }
+    }
+
+    private func initialize() {
+        getCdnPath()
+        initialized = true
+    }
+
+    private func getCdnPath() {
+        globalState.loadingStatus = String(localized: "msgLoadingCdnList")
+        AnoBbsApiClient.getCdnPath { cdnList in
+            globalState.cdnUrl = cdnList.sorted { $0.rate > $1.rate }.first!.url
+            logger.debug("CDN URL set. Value = \(globalState.cdnUrl)")
+        } failure: { error in
+            failedLoadingContent = true
+            errorMessage.append("msgFailedToLoadCdnList - \(error)")
         }
     }
 }

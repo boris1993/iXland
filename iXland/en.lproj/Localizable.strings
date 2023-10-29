@@ -24,6 +24,9 @@
 "msgInvalidCookieQrCode" = "Invalid QR code for adding cookie";
 "msgCookieAlreadyImported" = "This cookie has already imported";
 "msgFailedToCreateZXMultiFormatReader" = "Failed to create ZXMultiFormatReader";
+"msgLoadingCdnList" = "Loading the CDN list";
 "msgLoadingForumList" = "Loading the Forums";
+"msgFailedToLoadCdnList" = "Failed to load the CDN list";
+"msgFailedToInitialize" = "Failed to initialize. Error messages:";
 "msgFailedLoadingForumList" = "Failed loading the forums. Error message:";
 "msgTapToRetry" = "Tap here to retry";

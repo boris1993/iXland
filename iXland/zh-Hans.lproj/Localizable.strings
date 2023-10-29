@@ -24,6 +24,9 @@
 "msgInvalidCookieQrCode" = "添加饼干所用的二维码无效";
 "msgCookieAlreadyImported" = "这个饼干已经被导入了";
 "msgFailedToCreateZXMultiFormatReader" = "创建ZXMultiFormatReader失败";
+"msgLoadingCdnList" = "正在加载CDN列表";
 "msgLoadingForumList" = "正在加载板块列表";
+"msgFailedToLoadCdnList" = "加载CDN列表失败";
+"msgFailedToInitialize" = "初始化失败。错误信息：";
 "msgFailedLoadingForumList" = "载入板块列表失败。错误信息：";
 "msgTapToRetry" = "点击以重试";
