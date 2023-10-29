@@ -25,3 +25,5 @@
 "msgCookieAlreadyImported" = "This cookie has already imported";
 "msgFailedToCreateZXMultiFormatReader" = "Failed to create ZXMultiFormatReader";
 "msgLoadingForumList" = "Loading the Forums";
+"msgFailedLoadingForumList" = "Failed loading the forums. Error message:";
+"msgTapToRetry" = "Tap here to retry";

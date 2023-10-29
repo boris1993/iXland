@@ -24,48 +24,74 @@ struct ForumsView: View {
     private var errorMessage: String = ""
 
     @State
-    private var isContentLoaded = false
+    private var contentLoaded = false
+
+    @State
+    private var failedLoadingContent = false;
 
     @State
     var forumGroups = [ForumGroup]()
 
     var body: some View {
         NavigationStack {
-            List {
-                ForEach($forumGroups) { $forumGroup in
-                    Section {
-                        ForEach(forumGroup.forums) { forum in
-                            NavigationLink(destination: CookieListView(globalState: globalState)) {
-                                if (forum.showName == nil || forum.showName!.isEmpty) {
-                                    Text(forum.name)
-                                } else {
-                                    Text(forum.showName!)
+            if (contentLoaded) {
+                List {
+                    ForEach($forumGroups) { $forumGroup in
+                        Section {
+                            ForEach(forumGroup.forums) { forum in
+                                NavigationLink(destination: CookieListView(globalState: globalState)) {
+                                    if (forum.showName == nil || forum.showName!.isEmpty) {
+                                        Text(forum.name)
+                                    } else {
+                                        Text(forum.showName!)
+                                    }
                                 }
                             }
+                        } header: {
+                            Text(forumGroup.name)
                         }
-                    } header: {
-                        Text(forumGroup.name)
                     }
+                }.refreshable {
+                    loadForumList(isRefresh: true)
+                }
+            }
+
+            if (failedLoadingContent) {
+                VStack {
+                    Text("msgFailedLoadingForumList")
+                    Text(errorMessage)
+                    Text("msgTapToRetry")
+                }
+                .onTapGesture {
+                    failedLoadingContent = false
+                    loadForumList()
                 }
             }
         }
         .onAppear {
-            if (!isContentLoaded) {
-                globalState.loadingStatus = String(localized: "msgLoadingForumList");
-                shouldDisplayProgressView = true;
-
-                AnoBbsApiClient.loadForumGroups { forumGroups in
-                    self.forumGroups = forumGroups
-                    isContentLoaded = true
-                    shouldDisplayProgressView = false;
-                } failure: { error in
-                    showErrorToast(message: error)
-                    shouldDisplayProgressView = false;
-                }
+            if (!contentLoaded) {
+                loadForumList()
             }
         }
         .toast(isPresenting: $isErrorToastShowing) {
             AlertToast(type: .regular, title: errorMessage)
+        }
+    }
+
+    private func loadForumList(isRefresh: Bool = false) {
+        if (!isRefresh) {
+            globalState.loadingStatus = String(localized: "msgLoadingForumList")
+            shouldDisplayProgressView = true
+        }
+
+        AnoBbsApiClient.loadForumGroups { forumGroups in
+            self.forumGroups = forumGroups
+            contentLoaded = true
+            shouldDisplayProgressView = false
+        } failure: { error in
+            errorMessage = error
+            shouldDisplayProgressView = false
+            failedLoadingContent = true
         }
     }
 

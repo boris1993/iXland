@@ -25,3 +25,5 @@
 "msgCookieAlreadyImported" = "这个饼干已经被导入了";
 "msgFailedToCreateZXMultiFormatReader" = "创建ZXMultiFormatReader失败";
 "msgLoadingForumList" = "正在加载板块列表";
+"msgFailedLoadingForumList" = "载入板块列表失败。错误信息：";
+"msgTapToRetry" = "点击以重试";
