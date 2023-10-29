@@ -40,11 +40,7 @@ struct ForumsView: View {
                         Section {
                             ForEach(forumGroup.forums) { forum in
                                 NavigationLink(destination: CookieListView(globalState: globalState)) {
-                                    if (forum.showName == nil || forum.showName!.isEmpty) {
-                                        Text(forum.name)
-                                    } else {
-                                        Text(forum.showName!)
-                                    }
+                                    Text(forum.name)
                                 }
                             }
                         } header: {
