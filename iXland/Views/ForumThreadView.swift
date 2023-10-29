@@ -1,24 +1,6 @@
 import Foundation
 import SwiftUI
 
-class ForumThreadViewModel {
-    var id: String
-    var cookie: String
-    var title: String
-    var author: String
-    var now: String
-    var content: String
-
-    init(id: String, cookie: String, title: String, author: String, now: String, content: String) {
-        self.id = id
-        self.cookie = cookie
-        self.title = title
-        self.author = author
-        self.now = now
-        self.content = content
-    }
-}
-
 struct ForumThreadView: View {
     let logger = LoggerHelper.getLoggerForView(name: "ForumThreadView")
 
@@ -28,29 +10,46 @@ struct ForumThreadView: View {
     @Binding
     var forumThread: ForumThread
 
-    var body: some View {
-        VStack {
-            HStack{
-                Text(forumThread.id)
-                if (forumThread.admin == 1) {
-                    Text(forumThread.userHash).foregroundStyle(.red)
-                } else {
-                    Text(forumThread.userHash)
-                }
-                Text(forumThread.now).frame(maxWidth: .infinity, alignment: .trailing)
+    @StateObject
+    var globalState = GlobalState()
 
+    var body: some View {
+        VStack(spacing: 5) {
+            VStack {
+                HStack {
+                    HStack {
+                        Text(forumThread.id)
+
+                        if (forumThread.admin == 1) {
+                            Text(forumThread.userHash).foregroundStyle(.red)
+                        } else {
+                            Text(forumThread.userHash)
+                        }
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+
+                    HStack {
+                        if (forumThread.sage == 1) {
+                            Text("SAGE")
+                                .foregroundStyle(.red)
+                                .bold()
+                        }
+                    }
+                    .frame(maxWidth: .infinity, alignment: .trailing)
+
+                }
+
+                HStack {
+                    let forumName = globalState.forumIdAndNameDictionary["\(forumThread.fid)"]
+                    Text(forumName ?? "无此版面")
+                    Text(forumThread.now).frame(maxWidth: .infinity, alignment: .trailing)
+                }
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
+
+            Divider()
 
             Text(forumThread.content)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.leading, 5)
-            
-            if (forumThread.sage == 1) {
-                Text("SAGE")
-                    .foregroundStyle(.red)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-            }
         }
         .padding()
     }
