@@ -40,67 +40,76 @@ struct ContentView: View {
     }
 
     var body: some View {
-        TabView(selection: .init(
-            get: {
-                selectedTab
-            },
-            set: { newTab in
-                selectedTab = newTab
-                HapticsHelper.playHapticFeedback()
-            })) {
-                TimelineView()
-                    .tabItem {
-                        Image(systemName: "calendar.day.timeline.left")
-                        Text("Timeline")
+        ZStack {
+            if (loadCdnUrlFinished && loadForumListFinished) {
+                TabView(selection: .init(
+                    get: {
+                        selectedTab
+                    },
+                    set: { newTab in
+                        selectedTab = newTab
+                        HapticsHelper.playHapticFeedback()
+                    })) {
+                        TimelineView()
+                            .tabItem {
+                                Image(systemName: "calendar.day.timeline.left")
+                                Text("Timeline")
+                            }
+                            .tag(Tab.Timeline)
+                        ForumsView(globalState: globalState, shouldDisplayProgressView: $shouldDisplayProgressView, forumGroups: $forumGroups)
+                            .tabItem {
+                                Image(systemName: "square.stack")
+                                Text("Forums")
+                            }
+                            .tag(Tab.Forums)
+                        FavouritesView()
+                            .tabItem {
+                                Image(systemName: "star")
+                                Text("Favourites")
+                            }
+                            .tag(Tab.Favourites)
+                        SettingsView(globalState: globalState)
+                            .tabItem {
+                                Image(systemName: "gear")
+                                Text("Settings")
+                            }
+                            .tag(Tab.Settings)
                     }
-                    .tag(Tab.Timeline)
-                ForumsView(globalState: globalState, shouldDisplayProgressView: $shouldDisplayProgressView, forumGroups: $forumGroups)
-                    .tabItem {
-                        Image(systemName: "square.stack")
-                        Text("Forums")
+                    .onAppear {
+                        logger.info("Displaying the TabView")
                     }
-                    .tag(Tab.Forums)
-                FavouritesView()
-                    .tabItem {
-                        Image(systemName: "star")
-                        Text("Favourites")
-                    }
-                    .tag(Tab.Favourites)
-                SettingsView(globalState: globalState)
-                    .tabItem {
-                        Image(systemName: "gear")
-                        Text("Settings")
-                    }
-                    .tag(Tab.Settings)
-            }
-            .onAppear {
-                let selectedTheme = themePickerSelectedValue.rawValue
-                let appTheme = Themes(rawValue: selectedTheme)
-                ThemeHelper.setAppTheme(themePickerSelectedValue: appTheme!)
-            }
-            .task {
-                initialize()
-            }
-            .overlay {
-                // MARK: 显示初始化状态的ProgressView
-                ProgressView {
-                    Text("msgInitializing")
-                }
-                .progressViewStyle(CircularProgressViewStyle())
-                .scaledToFill()
-                .opacity(loadCdnUrlFinished && loadForumListFinished ? 0 : 1)
-
+            } else {
                 VStack {
-                    Text("msgFailedLoadingForumList")
-                    Text(errorMessage.joined(separator: "\n"))
-                    Text("msgTapToRetry")
+                    // MARK: 显示初始化状态的ProgressView
+                    ProgressView {
+                        Text("msgInitializing")
+                    }
+                    .progressViewStyle(CircularProgressViewStyle())
+                    .scaledToFill()
+                    .onAppear {
+                        logger.info("Displaying the initializing indicator")
+                        initialize()
+                    }
+                    .opacity(errorMessage.isEmpty ? 1 : 0)
+
+                    VStack {
+                        Text("msgFailedLoadingForumList")
+                        Text(errorMessage.joined(separator: "\n"))
+                        Text("msgTapToRetry")
+                    }
+                    .onTapGesture {
+                        errorMessage = []
+                        initialize()
+                    }
+                    .opacity(errorMessage.isEmpty ? 0 : 1)
                 }
-                .onTapGesture {
-                    errorMessage = []
-                    initialize()
-                }
-                .opacity(errorMessage.isEmpty ? 0 : 1)
             }
+        }
+        .onAppear {
+            let selectedTheme = themePickerSelectedValue.rawValue
+            let appTheme = Themes(rawValue: selectedTheme)
+            ThemeHelper.setAppTheme(themePickerSelectedValue: appTheme!)
+        }
     }
 
     private func initialize() {
@@ -115,7 +124,6 @@ struct ContentView: View {
             loadCdnUrlFinished = true
         } failure: { error in
             errorMessage.append("\(String(localized: "msgFailedToLoadCdnList")) - \(error)")
-            loadCdnUrlFinished = true
         }
     }
 
@@ -130,7 +138,6 @@ struct ContentView: View {
             loadForumListFinished = true
         } failure: { error in
             errorMessage.append("\(String(localized: "msgFailedToLoadForums")) - \(error)")
-            loadForumListFinished = true
         }
     }
 }
