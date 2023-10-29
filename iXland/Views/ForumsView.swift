@@ -45,6 +45,7 @@ struct ForumsView: View {
                             }
                         } header: {
                             Text(forumGroup.name)
+                                .font(.title3)
                         }
                     }
                 }.refreshable {
