@@ -27,8 +27,10 @@
 "msgInitializing" = "Initializing";
 "msgLoadingCdnList" = "Loading the CDN list";
 "msgLoadingForumList" = "Loading the Forums";
+"msgLoadingTimeline" = "Loading the timeline";
 "msgFailedToLoadCdnList" = "Failed to load the CDN list";
 "msgFailedToLoadForums" = "Failed to load the forums";
+"msgFailedToLoadTimeline" = "Failed to load the timeline";
 "msgFailedToInitialize" = "Failed to initialize. Error messages:";
 "msgFailedLoadingForumList" = "Failed loading the forums. Error message:";
 "msgTapToRetry" = "Tap here to retry";

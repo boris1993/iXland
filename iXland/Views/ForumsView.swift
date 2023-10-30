@@ -22,18 +22,16 @@ struct ForumsView: View {
 
     var body: some View {
         NavigationStack {
-            List {
-                ForEach($forumGroups) { $forumGroup in
-                    Section {
-                        ForEach(forumGroup.forums) { forum in
-                            NavigationLink(destination: CookieListView(globalState: globalState)) {
-                                Text(forum.name)
-                            }
+            List ($forumGroups) { $forumGroup in
+                Section {
+                    ForEach(forumGroup.forums) { forum in
+                        NavigationLink(destination: CookieListView(globalState: globalState)) {
+                            Text(forum.name)
                         }
-                    } header: {
-                        Text(forumGroup.name)
-                            .font(.title3)
                     }
+                } header: {
+                    Text(forumGroup.name)
+                        .font(.title3)
                 }
             }
             .opacity(forumGroups.isEmpty ? 0 : 1)
@@ -47,7 +45,6 @@ struct ForumsView_Previews: PreviewProvider {
 
     static var previews: some View {
         let context = PersistenceController.preview.container.viewContext
-
 
         ForumsView(globalState: globalState, shouldDisplayProgressView: .constant(false), forumGroups: .constant(ForumGroup.sample))
             .previewDisplayName("en")

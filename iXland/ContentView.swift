@@ -5,7 +5,7 @@ struct ContentView: View {
     private let logger = LoggerHelper.getLoggerForView(name: "ContentView")
     private let persistenceController = PersistenceController.shared
 
-    @StateObject
+    @ObservedObject
     var globalState = GlobalState()
 
     @Environment(\.managedObjectContext)
@@ -21,10 +21,16 @@ struct ContentView: View {
     private var shouldDisplayProgressView = false
 
     @State
+    private var progressViewText = ""
+
+    @State
     private var loadCdnUrlFinished = false
 
     @State
     private var loadForumListFinished = false
+
+    @State
+    private var forumIdAndNameDictionary: [String:String] = [:]
 
     @State
     private var errorMessage: [String] = []
@@ -50,7 +56,7 @@ struct ContentView: View {
                         selectedTab = newTab
                         HapticsHelper.playHapticFeedback()
                     })) {
-                        TimelineView()
+                        TimelineView(forumIdAndNameDictionary: $forumIdAndNameDictionary)
                             .tabItem {
                                 Image(systemName: "calendar.day.timeline.left")
                                 Text("Timeline")
@@ -132,9 +138,10 @@ struct ContentView: View {
         AnoBbsApiClient.loadForumGroups { forumGroups in
             self.forumGroups = forumGroups
             self.forumGroups.forEach { forumGroup in
-                globalState.forumIdAndNameDictionary[forumGroup.id] = forumGroup.name
+                forumGroup.forums.forEach { forum in
+                    self.forumIdAndNameDictionary[forum.id] = forum.name
+                }
             }
-
             loadForumListFinished = true
         } failure: { error in
             errorMessage.append("\(String(localized: "msgFailedToLoadForums")) - \(error)")

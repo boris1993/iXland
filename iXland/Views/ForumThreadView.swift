@@ -10,6 +10,9 @@ struct ForumThreadView: View {
     @Binding
     var forumThread: ForumThread
 
+    @Binding
+    var forumIdAndNameDictionary: [String:String]
+
     @StateObject
     var globalState = GlobalState()
 
@@ -17,32 +20,32 @@ struct ForumThreadView: View {
         VStack(spacing: 5) {
             VStack {
                 HStack {
-                    HStack {
-                        Text(forumThread.id)
-
-                        if (forumThread.admin == 1) {
-                            Text(forumThread.userHash).foregroundStyle(.red)
-                        } else {
-                            Text(forumThread.userHash)
-                        }
+                    if (forumThread.sage == 1) {
+                        Image(systemName: "arrowshape.down.fill")
+                            .foregroundColor(.red)
                     }
-                    .frame(maxWidth: .infinity, alignment: .leading)
 
-                    HStack {
-                        if (forumThread.sage == 1) {
-                            Text("SAGE")
-                                .foregroundStyle(.red)
-                                .bold()
-                        }
+                    Text("\(forumThread.id)")
+
+                    if (forumThread.admin == 1) {
+                        Text(forumThread.userHash).bold().foregroundStyle(.red)
+                    } else {
+                        Text(forumThread.userHash).bold()
                     }
-                    .frame(maxWidth: .infinity, alignment: .trailing)
 
+                    let forumName = self.forumIdAndNameDictionary["\(forumThread.fid)"]
+                    Text(forumName ?? "无此版面").frame(maxWidth: .infinity, alignment: .trailing)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+
+                Text(forumThread.now).frame(maxWidth: .infinity, alignment: .leading)
+
+                if (forumThread.title != "无标题") {
+                    Text("标题：\(forumThread.title)").frame(maxWidth: .infinity, alignment: .leading)
                 }
 
-                HStack {
-                    let forumName = globalState.forumIdAndNameDictionary["\(forumThread.fid)"]
-                    Text(forumName ?? "无此版面")
-                    Text(forumThread.now).frame(maxWidth: .infinity, alignment: .trailing)
+                if (forumThread.name != "无名氏") {
+                    Text("作者：\(forumThread.name)").frame(maxWidth: .infinity, alignment: .leading)
                 }
             }
 
@@ -51,28 +54,31 @@ struct ForumThreadView: View {
             Text(forumThread.content)
                 .frame(maxWidth: .infinity, alignment: .leading)
         }
-        .padding()
+        .font(.subheadline)
     }
 }
 
 struct ForumThreadView_Previews: PreviewProvider {
     static var previews: some View {
         let context = PersistenceController.preview.container.viewContext
-        let sampleData = ForumThread(id: "54961581",
+        let sampleData = ForumThread(id: 54961581,
                                      fid: 4,
                                      replyCount: 6,
                                      img: "",
                                      ext: "",
                                      now: "2023-01-19(四)23:27:29",
                                      userHash: "KXFkoBO",
-                                     name: "无名氏",
-                                     title: "无标题",
+                                     name: "作者",
+                                     title: "标题",
                                      content: "测试串内容\n测试串内容",
                                      sage: 1,
                                      admin: 1,
                                      hide: 0)
 
-        ForumThreadView(forumThread: .constant(sampleData))
-            .environment(\.managedObjectContext, context)
+        ForumThreadView(
+            forumThread: .constant(sampleData),
+            forumIdAndNameDictionary: .constant(["4": "综合版一"])
+        )
+        .environment(\.managedObjectContext, context)
     }
 }

@@ -27,8 +27,10 @@
 "msgInitializing" = "正在初始化";
 "msgLoadingCdnList" = "正在加载CDN列表";
 "msgLoadingForumList" = "正在加载板块列表";
+"msgLoadingTimeline" = "正在加载时间线";
 "msgFailedToLoadCdnList" = "加载CDN列表失败";
 "msgFailedToLoadForums" = "加载板块列表失败";
+"msgFailedToLoadTimeline" = "载入时间线失败";
 "msgFailedToInitialize" = "初始化失败。错误信息：";
 "msgFailedLoadingForumList" = "载入板块列表失败。错误信息：";
 "msgTapToRetry" = "点击这里以重试";

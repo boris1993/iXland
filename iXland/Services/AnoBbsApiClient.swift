@@ -10,7 +10,6 @@ final class AnoBbsApiClient {
         failure:@escaping (String) -> Void
     ) {
         logger.info("Loading CDN list")
-
         doRequest(url: XdnmbAPI.GET_CDN_LIST,
                   method: .get, 
                   complete: complete,
@@ -27,8 +26,18 @@ final class AnoBbsApiClient {
         failure:@escaping (String) -> Void
     ) {
         logger.info("Loading forum groups")
-
         doRequest(url: XdnmbAPI.GET_FORUM_LIST,
+                  method: .get,
+                  complete: complete,
+                  failure: failure)
+    }
+
+    public static func loadTimelineThreads(
+        complete:@escaping ([ForumThread]) -> Void,
+        failure:@escaping (String) -> Void
+    ) {
+        logger.info("Loading timeline")
+        doRequest(url: XdnmbAPI.GET_TIMELINE,
                   method: .get,
                   complete: complete,
                   failure: failure)
@@ -37,10 +46,11 @@ final class AnoBbsApiClient {
     private static func doRequest<T: Codable>(
         url: String,
         method: HTTPMethod,
+        timeout: Double = 10,
         complete:@escaping (T) -> Void,
         failure:@escaping (String) -> Void
     ) {
-        AF.request(url, method: method, interceptor: .retryPolicy) { request in request.timeoutInterval = 10 }
+        AF.request(url, method: method, interceptor: .retryPolicy) { request in request.timeoutInterval = timeout }
             .cacheResponse(using: .cache)
             .validate()
             .responseDecodable(of: T.self) { response in
@@ -48,6 +58,7 @@ final class AnoBbsApiClient {
                 case .success(let data):
                     complete(data)
                 case .failure(let error):
+                    print(error)
                     failure(error.underlyingError?.localizedDescription ?? error.localizedDescription)
                 }
             }
