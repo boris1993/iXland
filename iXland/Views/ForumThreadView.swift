@@ -25,16 +25,16 @@ struct ForumThreadView: View {
                             .foregroundColor(.red)
                     }
 
-                    Text("\(forumThread.id)")
+                    Text(verbatim: "\(forumThread.id)").foregroundStyle(.orange).brightness(-0.1)
 
                     if (forumThread.admin == 1) {
                         Text(forumThread.userHash).bold().foregroundStyle(.red)
                     } else {
-                        Text(forumThread.userHash).bold()
+                        Text(forumThread.userHash).bold().foregroundStyle(.orange).brightness(-0.1)
                     }
 
-                    let forumName = self.forumIdAndNameDictionary["\(forumThread.fid)"]
-                    Text(forumName ?? "无此版面").frame(maxWidth: .infinity, alignment: .trailing)
+                    let forumName = self.forumIdAndNameDictionary["\(forumThread.fid)"]!
+                    Text(forumName).frame(maxWidth: .infinity, alignment: .trailing)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
 
