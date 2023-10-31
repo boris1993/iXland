@@ -30,13 +30,16 @@ struct TimelineView: View {
     var body: some View {
         if (timelineInitialized) {
             NavigationStack {
-                List($timelineThreads) { $thread in
-                    NavigationLink(destination: Text("")) {
-                        ForumThreadView(forumThread: $thread,
-                                        forumIdAndNameDictionary: $forumIdAndNameDictionary,
-                                        cdnUrl: $cdnUrl)
+                GeometryReader { geometry in
+                    List($timelineThreads) { $thread in
+                        NavigationLink(destination: Text("")) {
+                            ForumThreadView(geometry: geometry,
+                                            forumThread: $thread,
+                                            forumIdAndNameDictionary: $forumIdAndNameDictionary,
+                                            cdnUrl: $cdnUrl)
+                        }
+                        .buttonStyle(.plain)
                     }
-                    .buttonStyle(.plain)
                 }
             }
         } else {

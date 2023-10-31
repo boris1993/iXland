@@ -7,6 +7,8 @@ struct ForumThreadView: View {
     @Environment(\.managedObjectContext)
     private var managedObjectContext
 
+    var geometry: GeometryProxy
+
     @Binding
     var forumThread: ForumThread
 
@@ -51,21 +53,19 @@ struct ForumThreadView: View {
 
             Divider()
 
-            GeometryReader { geometry in
-                HStack(alignment: .top) {
-                    if (!forumThread.img.isEmpty) {
-                        let url = URL(string: "\(cdnUrl)/image/\(forumThread.img)\(forumThread.ext)")
-                        AsyncImage(url: url) { image in
-                            image.image?
-                                .resizable(resizingMode: .stretch)
-                                .aspectRatio(contentMode: .fit)
-                        }
-                        .frame(maxWidth: geometry.size.width * 0.3, alignment: .topLeading)
+            HStack(alignment: .top) {
+                if (!forumThread.img.isEmpty) {
+                    let url = URL(string: "\(cdnUrl)/image/\(forumThread.img)\(forumThread.ext)")
+                    AsyncImage(url: url) { image in
+                        image.image?
+                            .resizable(resizingMode: .stretch)
+                            .aspectRatio(contentMode: .fit)
                     }
-
-                    Text(forumThread.content)
-                        .frame(maxHeight: .infinity, alignment: .topLeading)
+                    .frame(maxWidth: geometry.size.width * 0.2, alignment: .topLeading)
                 }
+
+                Text(forumThread.content)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
             }
         }
         .font(.subheadline)
@@ -77,11 +77,14 @@ struct ForumThreadView_Previews: PreviewProvider {
         let context = PersistenceController.preview.container.viewContext
         let sampleData = ForumThread.sample[0]
 
-        ForumThreadView(
-            forumThread: .constant(sampleData),
-            forumIdAndNameDictionary: .constant(["4": "综合版一"]),
-            cdnUrl: .constant("https://image.nmb.best/")
-        )
+        GeometryReader { geometry in
+            ForumThreadView(
+                geometry: geometry,
+                forumThread: .constant(sampleData),
+                forumIdAndNameDictionary: .constant(["4": "综合版一"]),
+                cdnUrl: .constant("https://image.nmb.best/")
+            )
+        }
         .environment(\.managedObjectContext, context)
     }
 }
