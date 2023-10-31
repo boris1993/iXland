@@ -40,6 +40,9 @@ struct TimelineView: View {
                         }
                         .buttonStyle(.plain)
                     }
+                    .refreshable {
+                        loadTimeline()
+                    }
                 }
             }
         } else {
