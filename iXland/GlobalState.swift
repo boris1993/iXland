@@ -4,7 +4,4 @@ import SwiftUI
 class GlobalState: ObservableObject {
     @Published
     var currentSelectedCookie: Cookie? = try? UserDefaultsHelper.getCurrentCookie()
-
-    @Published
-    var cdnUrl = ""
 }

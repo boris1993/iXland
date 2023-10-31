@@ -9,6 +9,9 @@ struct TimelineView: View {
     @StateObject
     var globalState = GlobalState()
 
+    @Binding
+    var cdnUrl: String
+
     @State
     var shouldDisplayProgressView = false
 
@@ -31,7 +34,7 @@ struct TimelineView: View {
                     NavigationLink(destination: Text("")) {
                         ForumThreadView(forumThread: $thread,
                                         forumIdAndNameDictionary: $forumIdAndNameDictionary,
-                                        globalState: globalState)
+                                        cdnUrl: $cdnUrl)
                     }
                     .buttonStyle(.plain)
                 }
@@ -70,6 +73,12 @@ struct TimelineView: View {
 
         AnoBbsApiClient.loadTimelineThreads { threads in
             self.timelineThreads = threads
+
+            for i in 0..<self.timelineThreads.count {
+                self.timelineThreads[i].content = self.timelineThreads[i].content.replacingOccurrences(of: "<br>", with: "\n")
+                self.timelineThreads[i].content = self.timelineThreads[i].content.replacingOccurrences(of: "<br />", with: "\n")
+            }
+
             self.timelineInitialized = true
             logger.debug("Done loading timeline")
         } failure: { error in
@@ -92,7 +101,7 @@ struct TimelineView_Previews: PreviewProvider {
         
         var body: some View {
             TimelineView(
-                globalState: globalState,
+                cdnUrl: .constant("https://image.nmb.best/"),
                 timelineInitialized: true,
                 timelineThreads: timelineThreads, 
                 forumIdAndNameDictionary: .constant(["4": "综合版一"])

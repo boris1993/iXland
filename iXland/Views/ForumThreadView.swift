@@ -13,8 +13,8 @@ struct ForumThreadView: View {
     @Binding
     var forumIdAndNameDictionary: [String:String]
 
-    @StateObject
-    var globalState = GlobalState()
+    @Binding
+    var cdnUrl: String
 
     var body: some View {
         VStack(spacing: 5) {
@@ -51,8 +51,22 @@ struct ForumThreadView: View {
 
             Divider()
 
-            Text(forumThread.content)
-                .frame(maxWidth: .infinity, alignment: .leading)
+            GeometryReader { geometry in
+                HStack(alignment: .top) {
+                    if (!forumThread.img.isEmpty) {
+                        let url = URL(string: "\(cdnUrl)/image/\(forumThread.img)\(forumThread.ext)")
+                        AsyncImage(url: url) { image in
+                            image.image?
+                                .resizable(resizingMode: .stretch)
+                                .aspectRatio(contentMode: .fit)
+                        }
+                        .frame(maxWidth: geometry.size.width * 0.3, alignment: .topLeading)
+                    }
+
+                    Text(forumThread.content)
+                        .frame(maxHeight: .infinity, alignment: .topLeading)
+                }
+            }
         }
         .font(.subheadline)
     }
@@ -61,23 +75,12 @@ struct ForumThreadView: View {
 struct ForumThreadView_Previews: PreviewProvider {
     static var previews: some View {
         let context = PersistenceController.preview.container.viewContext
-        let sampleData = ForumThread(id: 54961581,
-                                     fid: 4,
-                                     replyCount: 6,
-                                     img: "",
-                                     ext: "",
-                                     now: "2023-01-19(四)23:27:29",
-                                     userHash: "KXFkoBO",
-                                     name: "作者",
-                                     title: "标题",
-                                     content: "测试串内容\n测试串内容",
-                                     sage: 1,
-                                     admin: 1,
-                                     hide: 0)
+        let sampleData = ForumThread.sample[0]
 
         ForumThreadView(
             forumThread: .constant(sampleData),
-            forumIdAndNameDictionary: .constant(["4": "综合版一"])
+            forumIdAndNameDictionary: .constant(["4": "综合版一"]),
+            cdnUrl: .constant("https://image.nmb.best/")
         )
         .environment(\.managedObjectContext, context)
     }

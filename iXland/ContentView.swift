@@ -18,6 +18,9 @@ struct ContentView: View {
     private var selectedTab = Tab.Timeline
 
     @State
+    private var cdnUrl = ""
+
+    @State
     private var shouldDisplayProgressView = false
 
     @State
@@ -56,7 +59,7 @@ struct ContentView: View {
                         selectedTab = newTab
                         HapticsHelper.playHapticFeedback()
                     })) {
-                        TimelineView(forumIdAndNameDictionary: $forumIdAndNameDictionary)
+                        TimelineView(cdnUrl: $cdnUrl, forumIdAndNameDictionary: $forumIdAndNameDictionary)
                             .tabItem {
                                 Image(systemName: "calendar.day.timeline.left")
                                 Text("Timeline")
@@ -126,7 +129,7 @@ struct ContentView: View {
     private func getCdnPath() {
         loadCdnUrlFinished = false
         AnoBbsApiClient.getCdnPath { cdnList in
-            globalState.cdnUrl = cdnList.sorted { $0.rate > $1.rate }.first!.url
+            cdnUrl = cdnList.sorted { $0.rate > $1.rate }.first!.url
             loadCdnUrlFinished = true
         } failure: { error in
             errorMessage.append("\(String(localized: "msgFailedToLoadCdnList")) - \(error)")
