@@ -56,10 +56,19 @@ struct ForumThreadView: View {
             HStack(alignment: .top) {
                 if (!forumThread.img.isEmpty) {
                     let url = URL(string: "\(cdnUrl)/image/\(forumThread.img)\(forumThread.ext)")
-                    AsyncImage(url: url) { image in
-                        image.image?
-                            .resizable(resizingMode: .stretch)
-                            .aspectRatio(contentMode: .fit)
+                    AsyncImage(url: url) { phase in
+                        switch phase{
+                        case .empty:
+                            ProgressView()
+                        case let .success(image):
+                            image
+                                .resizable(resizingMode: .stretch)
+                                .aspectRatio(contentMode: .fit)
+                        case .failure(_):
+                            Image(systemName: "xmark.circle")
+                        @unknown default:
+                            Image(systemName: "xmark.circle")
+                        }
                     }
                     .frame(maxWidth: geometry.size.width * 0.2, alignment: .topLeading)
                 }
