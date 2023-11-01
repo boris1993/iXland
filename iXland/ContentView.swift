@@ -5,7 +5,7 @@ struct ContentView: View {
     private let logger = LoggerHelper.getLoggerForView(name: "ContentView")
     private let persistenceController = PersistenceController.shared
 
-    @ObservedObject
+    @StateObject
     var globalState = GlobalState()
 
     @Environment(\.managedObjectContext)
@@ -16,9 +16,6 @@ struct ContentView: View {
 
     @State
     private var selectedTab = Tab.Timeline
-
-    @State
-    private var cdnUrl = ""
 
     @State
     private var shouldDisplayProgressView = false
@@ -59,7 +56,8 @@ struct ContentView: View {
                         selectedTab = newTab
                         HapticsHelper.playHapticFeedback()
                     })) {
-                        TimelineView(cdnUrl: $cdnUrl, forumIdAndNameDictionary: $forumIdAndNameDictionary)
+                        TimelineView(forumIdAndNameDictionary: $forumIdAndNameDictionary)
+                            .environmentObject(globalState)
                             .tabItem {
                                 Image(systemName: "calendar.day.timeline.left")
                                 Text("Timeline")
@@ -132,7 +130,7 @@ struct ContentView: View {
     private func getCdnPath() {
         loadCdnUrlFinished = false
         AnoBbsApiClient.getCdnPath { cdnList in
-            cdnUrl = cdnList.sorted { $0.rate > $1.rate }.first!.url
+            globalState.cdnUrl = cdnList.sorted { $0.rate > $1.rate }.first!.url
             loadCdnUrlFinished = true
         } failure: { error in
             errorMessage.append("\(String(localized: "msgFailedToLoadCdnList")) - \(error)")

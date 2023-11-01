@@ -6,11 +6,8 @@ struct TimelineView: View {
     @Environment(\.managedObjectContext)
     private var managedObjectContext
 
-    @StateObject
-    var globalState = GlobalState()
-
-    @Binding
-    var cdnUrl: String
+    @EnvironmentObject
+    var globalState: GlobalState
 
     @State
     var shouldDisplayProgressView = false
@@ -35,8 +32,8 @@ struct TimelineView: View {
                         NavigationLink(destination: Text("")) {
                             ForumThreadView(geometry: geometry,
                                             forumThread: $thread,
-                                            forumIdAndNameDictionary: $forumIdAndNameDictionary,
-                                            cdnUrl: $cdnUrl)
+                                            forumIdAndNameDictionary: $forumIdAndNameDictionary)
+                            .environmentObject(globalState)
                         }
                         .buttonStyle(.plain)
                     }
@@ -103,21 +100,26 @@ struct TimelineView_Previews: PreviewProvider {
         @State
         var timelineThreads = ForumThread.sample
 
-        @ObservedObject
-        var globalState = GlobalState()
-        
+        @EnvironmentObject
+        var globalState: GlobalState
+
         var body: some View {
             TimelineView(
-                cdnUrl: .constant("https://image.nmb.best/"),
                 timelineInitialized: true,
                 timelineThreads: timelineThreads, 
                 forumIdAndNameDictionary: .constant(["4": "综合版一"])
             )
             .environment(\.managedObjectContext, context)
+            .environmentObject(globalState)
         }
     }
 
     static var previews: some View {
         Container()
+            .environmentObject({ () -> GlobalState in
+                let globalState = GlobalState()
+                globalState.cdnUrl = "https://image.nmb.best/"
+                return globalState
+            }())
     }
 }

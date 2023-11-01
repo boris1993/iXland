@@ -15,8 +15,8 @@ struct ForumThreadView: View {
     @Binding
     var forumIdAndNameDictionary: [String:String]
 
-    @Binding
-    var cdnUrl: String
+    @EnvironmentObject
+    var globalState: GlobalState
 
     var body: some View {
         VStack(spacing: 5) {
@@ -55,7 +55,7 @@ struct ForumThreadView: View {
 
             HStack(alignment: .top) {
                 if (!forumThread.img.isEmpty) {
-                    let url = URL(string: "\(cdnUrl)/image/\(forumThread.img)\(forumThread.ext)")
+                    let url = URL(string: "\(globalState.cdnUrl)/image/\(forumThread.img)\(forumThread.ext)")
                     AsyncImage(url: url) { phase in
                         switch phase{
                         case .empty:
@@ -90,10 +90,14 @@ struct ForumThreadView_Previews: PreviewProvider {
             ForumThreadView(
                 geometry: geometry,
                 forumThread: .constant(sampleData),
-                forumIdAndNameDictionary: .constant(["4": "综合版一"]),
-                cdnUrl: .constant("https://image.nmb.best/")
+                forumIdAndNameDictionary: .constant(["4": "综合版一"])
             )
         }
         .environment(\.managedObjectContext, context)
+        .environmentObject({ () -> GlobalState in
+            let globalState = GlobalState()
+            globalState.cdnUrl = "https://image.nmb.best/"
+            return globalState
+        }())
     }
 }
