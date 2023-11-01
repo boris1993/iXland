@@ -30,9 +30,6 @@ struct ContentView: View {
     private var loadForumListFinished = false
 
     @State
-    private var forumIdAndNameDictionary: [String:String] = [:]
-
-    @State
     private var errorMessage: [String] = []
 
     @State
@@ -56,7 +53,7 @@ struct ContentView: View {
                         selectedTab = newTab
                         HapticsHelper.playHapticFeedback()
                     })) {
-                        TimelineView(forumIdAndNameDictionary: $forumIdAndNameDictionary)
+                        TimelineView()
                             .environmentObject(globalState)
                             .tabItem {
                                 Image(systemName: "calendar.day.timeline.left")
@@ -143,7 +140,7 @@ struct ContentView: View {
             self.forumGroups = forumGroups
             self.forumGroups.forEach { forumGroup in
                 forumGroup.forums.forEach { forum in
-                    self.forumIdAndNameDictionary[forum.id] = forum.name
+                    globalState.forumIdAndNameDictionary[forum.id] = forum.name
                 }
             }
             loadForumListFinished = true

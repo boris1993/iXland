@@ -12,9 +12,6 @@ struct ForumThreadView: View {
     @Binding
     var forumThread: ForumThread
 
-    @Binding
-    var forumIdAndNameDictionary: [String:String]
-
     @EnvironmentObject
     var globalState: GlobalState
 
@@ -35,7 +32,7 @@ struct ForumThreadView: View {
                         Text(forumThread.userHash).bold().foregroundStyle(.orange).brightness(-0.1)
                     }
 
-                    let forumName = self.forumIdAndNameDictionary["\(forumThread.fid)"]!
+                    let forumName = globalState.forumIdAndNameDictionary["\(forumThread.fid)"]!
                     Text(forumName).frame(maxWidth: .infinity, alignment: .trailing)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -89,14 +86,16 @@ struct ForumThreadView_Previews: PreviewProvider {
         GeometryReader { geometry in
             ForumThreadView(
                 geometry: geometry,
-                forumThread: .constant(sampleData),
-                forumIdAndNameDictionary: .constant(["4": "综合版一"])
+                forumThread: .constant(sampleData)
             )
         }
         .environment(\.managedObjectContext, context)
         .environmentObject({ () -> GlobalState in
             let globalState = GlobalState()
+            
             globalState.cdnUrl = "https://image.nmb.best/"
+            globalState.forumIdAndNameDictionary["4"] = "综合版一"
+
             return globalState
         }())
     }

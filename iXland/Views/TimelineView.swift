@@ -21,9 +21,6 @@ struct TimelineView: View {
     @State
     var timelineThreads = [ForumThread]()
 
-    @Binding
-    var forumIdAndNameDictionary: [String: String]
-
     var body: some View {
         if (timelineInitialized) {
             NavigationStack {
@@ -31,8 +28,7 @@ struct TimelineView: View {
                     List($timelineThreads) { $thread in
                         NavigationLink(destination: Text("")) {
                             ForumThreadView(geometry: geometry,
-                                            forumThread: $thread,
-                                            forumIdAndNameDictionary: $forumIdAndNameDictionary)
+                                            forumThread: $thread)
                             .environmentObject(globalState)
                         }
                         .buttonStyle(.plain)
@@ -106,8 +102,7 @@ struct TimelineView_Previews: PreviewProvider {
         var body: some View {
             TimelineView(
                 timelineInitialized: true,
-                timelineThreads: timelineThreads, 
-                forumIdAndNameDictionary: .constant(["4": "综合版一"])
+                timelineThreads: timelineThreads
             )
             .environment(\.managedObjectContext, context)
             .environmentObject(globalState)
@@ -118,7 +113,10 @@ struct TimelineView_Previews: PreviewProvider {
         Container()
             .environmentObject({ () -> GlobalState in
                 let globalState = GlobalState()
+                
                 globalState.cdnUrl = "https://image.nmb.best/"
+                globalState.forumIdAndNameDictionary["4"] = "综合版一"
+
                 return globalState
             }())
     }
