@@ -86,6 +86,9 @@ struct ContentView: View {
                     }
                     .onAppear {
                         logger.info("Displaying the TabView")
+                        let tabBarAppearance = UITabBarAppearance()
+                        tabBarAppearance.configureWithDefaultBackground()
+                        UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
                     }
             } else {
                 VStack {
