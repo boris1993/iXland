@@ -51,7 +51,7 @@ struct ForumThreadView: View {
                 }
             }
 
-            Divider()
+            Spacer()
 
             HStack(alignment: .top) {
                 if (!forumThread.img.isEmpty) {
