@@ -1,4 +1,5 @@
 import SwiftUI
+import AlertToast
 
 struct TimelineView: View {
     let logger = LoggerHelper.getLoggerForView(name: "TimelineView")
@@ -14,6 +15,9 @@ struct TimelineView: View {
 
     @State
     var timelineInitialized = false
+
+    @State
+    var isErrorToastShowing = false
 
     @State
     var errorMessage = ""
@@ -35,9 +39,12 @@ struct TimelineView: View {
                     }
                     .listStyle(PlainListStyle())
                     .refreshable {
-                        loadTimeline()
+                        await loadTimeline()
                     }
                 }
+            }
+            .toast(isPresenting: $isErrorToastShowing) {
+                AlertToast(type: .regular, title: errorMessage)
             }
         } else {
             VStack {
@@ -48,7 +55,9 @@ struct TimelineView: View {
                 .scaledToFill()
                 .onAppear {
                     if (!timelineInitialized) {
-                        loadTimeline()
+                        Task {
+                            await loadTimeline()
+                        }
                     }
                 }
                 .opacity(!timelineInitialized && errorMessage.isEmpty ? 1 : 0)
@@ -60,20 +69,19 @@ struct TimelineView: View {
                 }
                 .onTapGesture {
                     errorMessage = ""
-                    loadTimeline()
+                    Task {
+                        await loadTimeline()
+                    }
                 }
-                .opacity(errorMessage.isEmpty ? 0 : 1)
+                .opacity(!timelineInitialized && !errorMessage.isEmpty ? 1 : 0)
             }
         }
 
     }
 
-    private func loadTimeline() {
-        shouldDisplayProgressView = true
-
-        AnoBbsApiClient.loadTimelineThreads { threads in
-            self.timelineThreads = threads
-
+    private func loadTimeline() async {
+        do {
+            self.timelineThreads = try await AnoBbsApiClient.loadTimelineThreads()
             for i in 0..<self.timelineThreads.count {
                 self.timelineThreads[i].content = self.timelineThreads[i].content.replacingOccurrences(of: "<br>", with: "\n")
                 self.timelineThreads[i].content = self.timelineThreads[i].content.replacingOccurrences(of: "<br />", with: "\n")
@@ -81,8 +89,11 @@ struct TimelineView: View {
 
             self.timelineInitialized = true
             logger.debug("Done loading timeline")
-        } failure: { error in
-            errorMessage = error
+        } catch let error {
+            errorMessage = "\(String(localized: "msgFailedToLoadTimeline"))\n\(error.localizedDescription)"
+            if (timelineInitialized) {
+                isErrorToastShowing = true
+            }
         }
 
         shouldDisplayProgressView = false

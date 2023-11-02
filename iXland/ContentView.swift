@@ -95,7 +95,9 @@ struct ContentView: View {
                     .scaledToFill()
                     .onAppear {
                         logger.info("Displaying the initializing indicator")
-                        initialize()
+                        Task {
+                            await initialize()
+                        }
                     }
                     .opacity(errorMessage.isEmpty ? 1 : 0)
 
@@ -106,7 +108,10 @@ struct ContentView: View {
                     }
                     .onTapGesture {
                         errorMessage = []
-                        initialize()
+                        Task {
+                            await initialize()
+                        }
+
                     }
                     .opacity(errorMessage.isEmpty ? 0 : 1)
                 }
@@ -119,32 +124,33 @@ struct ContentView: View {
         }
     }
 
-    private func initialize() {
-        getCdnPath()
-        initializeForums()
+    private func initialize() async {
+        await getCdnPath()
+        await initializeForums()
     }
 
-    private func getCdnPath() {
+    private func getCdnPath() async {
         loadCdnUrlFinished = false
-        AnoBbsApiClient.getCdnPath { cdnList in
+        do {
+            let cdnList = try await AnoBbsApiClient.getCdnPath()
             globalState.cdnUrl = cdnList.sorted { $0.rate > $1.rate }.first!.url
             loadCdnUrlFinished = true
-        } failure: { error in
+        } catch let error {
             errorMessage.append("\(String(localized: "msgFailedToLoadCdnList")) - \(error)")
         }
     }
 
-    private func initializeForums() {
+    private func initializeForums() async {
         loadForumListFinished = false
-        AnoBbsApiClient.loadForumGroups { forumGroups in
-            self.forumGroups = forumGroups
+        do {
+            self.forumGroups = try await AnoBbsApiClient.loadForumGroups()
             self.forumGroups.forEach { forumGroup in
                 forumGroup.forums.forEach { forum in
                     globalState.forumIdAndNameDictionary[forum.id] = forum.name
                 }
             }
             loadForumListFinished = true
-        } failure: { error in
+        } catch let error {
             errorMessage.append("\(String(localized: "msgFailedToLoadForums")) - \(error)")
         }
     }
