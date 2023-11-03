@@ -78,6 +78,33 @@ struct ForumThreadView: View {
     }
 }
 
+struct ForumThreadViewNavigationLink: View {
+    @EnvironmentObject
+    var globalState: GlobalState
+
+    @Binding
+    var timelineThreads: [ForumThread]
+
+    var loadAndRefreshFunction: () async -> Void
+
+    var body: some View {
+        GeometryReader { geometry in
+            List($timelineThreads) { $thread in
+                NavigationLink(destination: Text("")) {
+                    ForumThreadView(geometry: geometry,
+                                    forumThread: $thread)
+                    .environmentObject(globalState)
+                }
+                .buttonStyle(.plain)
+            }
+            .listStyle(PlainListStyle())
+            .refreshable {
+                await loadAndRefreshFunction()
+            }
+        }
+    }
+}
+
 struct ForumThreadView_Previews: PreviewProvider {
     static var previews: some View {
         let context = PersistenceController.preview.container.viewContext

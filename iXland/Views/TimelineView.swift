@@ -28,20 +28,11 @@ struct TimelineView: View {
     var body: some View {
         if (timelineInitialized) {
             NavigationStack {
-                GeometryReader { geometry in
-                    List($timelineThreads) { $thread in
-                        NavigationLink(destination: Text("")) {
-                            ForumThreadView(geometry: geometry,
-                                            forumThread: $thread)
-                            .environmentObject(globalState)
-                        }
-                        .buttonStyle(.plain)
-                    }
-                    .listStyle(PlainListStyle())
-                    .refreshable {
-                        await loadTimeline()
-                    }
-                }
+                ForumThreadViewNavigationLink(
+                    timelineThreads: $timelineThreads,
+                    loadAndRefreshFunction: loadTimeline
+                )
+                .environmentObject(globalState)
             }
             .toast(isPresenting: $isErrorToastShowing) {
                 AlertToast(type: .regular, title: errorMessage)
@@ -90,7 +81,7 @@ struct TimelineView: View {
             self.timelineInitialized = true
             logger.debug("Done loading timeline")
         } catch let error {
-            errorMessage = "\(String(localized: "msgFailedToLoadTimeline"))\n\(error.localizedDescription)"
+            errorMessage = error.localizedDescription
             if (timelineInitialized) {
                 isErrorToastShowing = true
             }
