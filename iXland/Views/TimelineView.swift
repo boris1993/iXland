@@ -17,10 +17,25 @@ struct TimelineView: View {
     var timelineInitialized = false
 
     @State
+    var changingTimeline = false
+
+    @State
     var isErrorToastShowing = false
 
     @State
     var errorMessage = ""
+
+    @State
+    var timelineForums = [TimelineForum]()
+
+    @State
+    var timelineNameAndIdDictionary = [String:Int]()
+
+    @State
+    var currentSelectedTimelineId = 0
+
+    @State
+    var currentSelectedTimelineName = ""
 
     @State
     var timelineThreads = [ForumThread]()
@@ -33,6 +48,32 @@ struct TimelineView: View {
                     loadAndRefreshFunction: loadTimeline
                 )
                 .environmentObject(globalState)
+                .toolbar {
+                    ToolbarItem(placement: .topBarLeading) {
+                        Picker(selection: $currentSelectedTimelineId) {
+                            ForEach(timelineForums) { timelineForum in
+                                Text(timelineForum.name).tag(timelineForum.id)
+                            }
+                        } label: {
+                        }
+                        .pickerStyle(.menu)
+                        .onChange(of: currentSelectedTimelineId) { selectedTimelineForumId in
+                            logger.info("\(currentSelectedTimelineId)")
+                            logger.info("\(selectedTimelineForumId)")
+                            Task {
+                                await clearTimelineAndReload()
+                            }
+                        }
+                    }
+                }
+            }
+            .overlay {
+                ProgressView {
+                    Text(String(localized: "msgLoadingTimeline"))
+                }
+                .progressViewStyle(CircularProgressViewStyle())
+                .scaledToFill()
+                .opacity(changingTimeline ? 1 : 0)
             }
             .toast(isPresenting: $isErrorToastShowing) {
                 AlertToast(type: .regular, title: errorMessage)
@@ -47,6 +88,7 @@ struct TimelineView: View {
                 .onAppear {
                     if (!timelineInitialized) {
                         Task {
+                            await loadTimelineForums()
                             await loadTimeline()
                         }
                     }
@@ -67,12 +109,23 @@ struct TimelineView: View {
                 .opacity(!timelineInitialized && !errorMessage.isEmpty ? 1 : 0)
             }
         }
+    }
 
+    private func loadTimelineForums() async {
+        do {
+            self.timelineForums = try await AnoBbsApiClient.loadTimelineForums()
+            self.currentSelectedTimelineId = self.timelineForums[0].id
+            self.timelineForums.forEach { timelineForum in
+                self.timelineNameAndIdDictionary[timelineForum.name] = timelineForum.id
+            }
+        } catch let error {
+            errorMessage = error.localizedDescription
+        }
     }
 
     private func loadTimeline() async {
         do {
-            self.timelineThreads = try await AnoBbsApiClient.loadTimelineThreads()
+            self.timelineThreads = try await AnoBbsApiClient.loadTimelineThreads(id: self.currentSelectedTimelineId)
             for i in 0..<self.timelineThreads.count {
                 self.timelineThreads[i].content = self.timelineThreads[i].content.replacingOccurrences(of: "<br>", with: "\n")
                 self.timelineThreads[i].content = self.timelineThreads[i].content.replacingOccurrences(of: "<br />", with: "\n")
@@ -89,6 +142,12 @@ struct TimelineView: View {
 
         shouldDisplayProgressView = false
     }
+
+    private func clearTimelineAndReload() async {
+        self.changingTimeline = true
+        self.timelineThreads = []
+        await loadTimeline()
+    }
 }
 
 struct TimelineView_Previews: PreviewProvider {
@@ -104,6 +163,7 @@ struct TimelineView_Previews: PreviewProvider {
         var body: some View {
             TimelineView(
                 timelineInitialized: true,
+                timelineForums: TimelineForum.sample,
                 timelineThreads: timelineThreads
             )
             .environment(\.managedObjectContext, context)

@@ -9,5 +9,5 @@ class GlobalState: ObservableObject {
     var cdnUrl = ""
 
     @Published
-    var forumIdAndNameDictionary: [String:String] = [:]
+    var forumIdAndNameDictionary = [String:String]()
 }

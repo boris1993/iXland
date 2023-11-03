@@ -19,5 +19,5 @@ struct XdnmbAPI {
     static let GET_CDN_LIST = "\(BASE_URL)/Api/getCdnPath"
     static let GET_TIMELINE_LIST = "\(BASE_URL)/Api/getTimelineList"
     static let GET_FORUM_LIST = "\(BASE_URL)/Api/getForumList"
-    static let GET_TIMELINE = "\(BASE_URL)/Api/Timeline?id=1&page=1"
+    static let GET_TIMELINE = "\(BASE_URL)/Api/Timeline"
 }
