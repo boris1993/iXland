@@ -36,9 +36,19 @@ final class AnoBbsApiClient {
         timeout: Double = 10,
         useCache: Bool = true
     ) async throws -> T {
+        let globalState = GlobalState.shared
+        let currentSelectedCookie = globalState.currentSelectedCookie
+
+        var headers = HTTPHeaders()
+        if (currentSelectedCookie != nil) {
+            logger.debug("Current selected cookie: \(currentSelectedCookie!.name!)")
+            headers.add(HTTPHeader(name: "Cookie", value: "\(Constants.COOKIE_NAME_USERHASH)=\(currentSelectedCookie!.cookie!)"))
+        }
+
+
         let jsonDecoder = JSONDecoder()
         let request = AF
-            .request(url, method: method, interceptor: .retryPolicy) { request in request.timeoutInterval = timeout }
+            .request(url, method: method, headers: headers ,interceptor: .retryPolicy) { request in request.timeoutInterval = timeout }
             .validate(statusCode: 200..<299)
 
         if (useCache) {

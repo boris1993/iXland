@@ -11,13 +11,7 @@ struct TimelineView: View {
     var globalState: GlobalState
 
     @State
-    var shouldDisplayProgressView = false
-
-    @State
     var timelineInitialized = false
-
-    @State
-    var changingTimeline = false
 
     @State
     var isErrorToastShowing = false
@@ -35,64 +29,44 @@ struct TimelineView: View {
     var currentSelectedTimelineId = 0
 
     @State
-    var currentSelectedTimelineName = ""
-
-    @State
     var timelineThreads = [ForumThread]()
 
     var body: some View {
-        if (timelineInitialized) {
-            NavigationStack {
-                ForumThreadViewNavigationLink(
-                    timelineThreads: $timelineThreads,
-                    loadAndRefreshFunction: loadTimeline
-                )
-                .environmentObject(globalState)
-                .toolbar {
-                    ToolbarItem(placement: .topBarLeading) {
-                        Picker(selection: $currentSelectedTimelineId) {
-                            ForEach(timelineForums) { timelineForum in
-                                Text(timelineForum.name).tag(timelineForum.id)
-                            }
-                        } label: {
+        NavigationStack {
+            ForumThreadViewNavigationLink(
+                timelineThreads: $timelineThreads,
+                loadAndRefreshFunction: loadTimeline
+            )
+            .environmentObject(globalState)
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Picker(selection: $currentSelectedTimelineId) {
+                        ForEach(timelineForums) { timelineForum in
+                            Text(timelineForum.name).tag(timelineForum.id)
                         }
-                        .pickerStyle(.menu)
-                        .onChange(of: currentSelectedTimelineId) { selectedTimelineForumId in
-                            logger.info("\(currentSelectedTimelineId)")
-                            logger.info("\(selectedTimelineForumId)")
-                            Task {
-                                await clearTimelineAndReload()
-                            }
+                    } label: {
+                    }
+                    .pickerStyle(.menu)
+                    .onChange(of: currentSelectedTimelineId) { selectedTimelineForumId in
+                        Task {
+                            await clearTimelineAndReload()
                         }
                     }
                 }
             }
-            .overlay {
-                ProgressView {
-                    Text(String(localized: "msgLoadingTimeline"))
-                }
-                .progressViewStyle(CircularProgressViewStyle())
-                .scaledToFill()
-                .opacity(changingTimeline ? 1 : 0)
+        }
+        .onAppear {
+            Task {
+                await loadTimelineForums()
             }
-            .toast(isPresenting: $isErrorToastShowing) {
-                AlertToast(type: .regular, title: errorMessage)
-            }
-        } else {
+        }
+        .overlay {
             VStack {
                 ProgressView {
-                    Text(String(localized: "msgLoadingTimeline"))
+                    Text("msgLoadingTimeline")
                 }
                 .progressViewStyle(CircularProgressViewStyle())
                 .scaledToFill()
-                .onAppear {
-                    if (!timelineInitialized) {
-                        Task {
-                            await loadTimelineForums()
-                            await loadTimeline()
-                        }
-                    }
-                }
                 .opacity(!timelineInitialized && errorMessage.isEmpty ? 1 : 0)
 
                 VStack {
@@ -109,6 +83,9 @@ struct TimelineView: View {
                 .opacity(!timelineInitialized && !errorMessage.isEmpty ? 1 : 0)
             }
         }
+        .toast(isPresenting: $isErrorToastShowing) {
+            AlertToast(type: .regular, title: errorMessage)
+        }
     }
 
     private func loadTimelineForums() async {
@@ -121,6 +98,13 @@ struct TimelineView: View {
         } catch let error {
             errorMessage = error.localizedDescription
         }
+    }
+
+    private func clearTimelineAndReload() async {
+        self.timelineInitialized = false
+        self.errorMessage = ""
+        self.timelineThreads = []
+        await loadTimeline()
     }
 
     private func loadTimeline() async {
@@ -139,14 +123,6 @@ struct TimelineView: View {
                 isErrorToastShowing = true
             }
         }
-
-        shouldDisplayProgressView = false
-    }
-
-    private func clearTimelineAndReload() async {
-        self.changingTimeline = true
-        self.timelineThreads = []
-        await loadTimeline()
     }
 }
 

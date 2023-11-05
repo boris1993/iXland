@@ -2,12 +2,14 @@ import Foundation
 import SwiftUI
 
 class GlobalState: ObservableObject {
-    @Published
-    var currentSelectedCookie: Cookie? = try? UserDefaultsHelper.getCurrentCookie()
+    public static let shared = GlobalState()
 
     @Published
-    var cdnUrl = ""
+    public var currentSelectedCookie: Cookie? = try? UserDefaultsHelper.getCurrentCookie()
 
     @Published
-    var forumIdAndNameDictionary = [String:String]()
+    public var cdnUrl = ""
+
+    @Published
+    public var forumIdAndNameDictionary = [String:String]()
 }

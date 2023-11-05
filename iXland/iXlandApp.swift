@@ -19,6 +19,7 @@ struct iXlandApp: App {
         WindowGroup {
             ContentView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                .environmentObject(GlobalState.shared)
         }
     }
 }

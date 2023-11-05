@@ -5,8 +5,8 @@ struct ContentView: View {
     private let logger = LoggerHelper.getLoggerForView(name: "ContentView")
     private let persistenceController = PersistenceController.shared
 
-    @StateObject
-    var globalState = GlobalState()
+    @EnvironmentObject
+    var globalState: GlobalState
 
     @Environment(\.managedObjectContext)
     private var managedObjectContext
