@@ -70,7 +70,7 @@ struct ForumThreadView: View {
                     .frame(maxWidth: geometry.size.width * 0.2, alignment: .topLeading)
                 }
 
-                Text(forumThread.content)
+                Text(.init(forumThread.content))
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
             }
         }

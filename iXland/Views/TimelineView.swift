@@ -111,8 +111,7 @@ struct TimelineView: View {
         do {
             self.timelineThreads = try await AnoBbsApiClient.loadTimelineThreads(id: self.currentSelectedTimelineId)
             for i in 0..<self.timelineThreads.count {
-                self.timelineThreads[i].content = self.timelineThreads[i].content.replacingOccurrences(of: "<br>", with: "\n")
-                self.timelineThreads[i].content = self.timelineThreads[i].content.replacingOccurrences(of: "<br />", with: "\n")
+                self.timelineThreads[i].content = HtmlParser.normalizeTexts(content: self.timelineThreads[i].content)
             }
 
             self.timelineInitialized = true
