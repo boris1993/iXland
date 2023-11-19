@@ -7,6 +7,7 @@
 
 import XCTest
 
+// swiftlint:disable type_name
 final class iXlandUITestsLaunchTests: XCTestCase {
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
@@ -30,3 +31,4 @@ final class iXlandUITestsLaunchTests: XCTestCase {
         add(attachment)
     }
 }
+// swiftlint:enable type_name

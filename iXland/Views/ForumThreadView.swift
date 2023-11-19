@@ -19,14 +19,14 @@ struct ForumThreadView: View {
         VStack(spacing: 5) {
             VStack {
                 HStack {
-                    if (forumThread.sage == 1) {
+                    if forumThread.sage == 1 {
                         Image(systemName: "arrowshape.down.fill")
                             .foregroundColor(.red)
                     }
 
                     Text(verbatim: "\(forumThread.id)").foregroundStyle(.orange).brightness(-0.1)
 
-                    if (forumThread.admin == 1) {
+                    if forumThread.admin == 1 {
                         Text(forumThread.userHash).bold().foregroundStyle(.red)
                     } else {
                         Text(forumThread.userHash).bold().foregroundStyle(.orange).brightness(-0.1)
@@ -39,11 +39,11 @@ struct ForumThreadView: View {
 
                 Text(forumThread.now).frame(maxWidth: .infinity, alignment: .leading)
 
-                if (forumThread.title != "无标题") {
+                if forumThread.title != "无标题" {
                     Text("标题：\(forumThread.title)").frame(maxWidth: .infinity, alignment: .leading)
                 }
 
-                if (forumThread.name != "无名氏") {
+                if forumThread.name != "无名氏" {
                     Text("作者：\(forumThread.name)").frame(maxWidth: .infinity, alignment: .leading)
                 }
             }
@@ -51,17 +51,19 @@ struct ForumThreadView: View {
             Spacer()
 
             HStack(alignment: .top) {
-                if (!forumThread.img.isEmpty) {
+                if !forumThread.img.isEmpty {
                     let url = URL(string: "\(globalState.cdnUrl)/image/\(forumThread.img)\(forumThread.ext)")
                     AsyncImage(url: url) { phase in
-                        switch phase{
+                        switch phase {
                         case .empty:
                             ProgressView()
                         case let .success(image):
                             image
                                 .resizable(resizingMode: .stretch)
                                 .aspectRatio(contentMode: .fit)
+                        // swiftlint:disable empty_enum_arguments
                         case .failure(_):
+                        // swiftlint:enable empty_enum_arguments
                             Image(systemName: "xmark.circle")
                         @unknown default:
                             Image(systemName: "xmark.circle")
@@ -119,7 +121,7 @@ struct ForumThreadView_Previews: PreviewProvider {
         .environment(\.managedObjectContext, context)
         .environmentObject({ () -> GlobalState in
             let globalState = GlobalState()
-            
+
             globalState.cdnUrl = "https://image.nmb.best/"
             globalState.forumIdAndNameDictionary["4"] = "综合版一"
 

@@ -7,7 +7,7 @@ import AlertToast
 struct CookieListView: View {
     private let logger = LoggerHelper.getLoggerForView(name: "SettingsView")
     private let jsonDecoder = JSONDecoder()
-    
+
     private let persistenceController: PersistenceController
 
     @FetchRequest(
@@ -100,7 +100,8 @@ struct CookieListView: View {
                                         .frame(width: 275, height: 275)
                                 )
                             }
-                            .navigationBarItems(leading: Button("buttonCancel", action: {isQrCodeScannerShowing = false}))
+                            .navigationBarItems(
+                                leading: Button("buttonCancel", action: {isQrCodeScannerShowing = false}))
                         }
                     }
                     .sheet(isPresented: $isPhotoPickerShowing) {

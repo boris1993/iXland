@@ -15,7 +15,7 @@ struct ContentView: View {
     private var systemColorScheme
 
     @State
-    private var selectedTab = Tab.Timeline
+    private var selectedTab = Tab.timeline
 
     @State
     private var shouldDisplayProgressView = false
@@ -35,16 +35,16 @@ struct ContentView: View {
     @State
     var forumGroups: [ForumGroup] = []
 
-    @AppStorage(UserDefaultsKey.THEME)
+    @AppStorage(UserDefaultsKey.Theme)
     private var themePickerSelectedValue: Themes = Themes.dark
 
     private enum Tab: String {
-        case Timeline, Forums, Favourites, Settings
+        case timeline, forums, favourites, settings
     }
 
     var body: some View {
         ZStack {
-            if (loadCdnUrlFinished && loadForumListFinished) {
+            if loadCdnUrlFinished && loadForumListFinished {
                 TabView(selection: .init(
                     get: {
                         selectedTab
@@ -59,25 +59,29 @@ struct ContentView: View {
                                 Image(systemName: "calendar.day.timeline.left")
                                 Text("Timeline")
                             }
-                            .tag(Tab.Timeline)
-                        ForumsView(globalState: globalState, shouldDisplayProgressView: $shouldDisplayProgressView, forumGroups: $forumGroups)
-                            .tabItem {
-                                Image(systemName: "square.stack")
-                                Text("Forums")
-                            }
-                            .tag(Tab.Forums)
+                            .tag(Tab.timeline)
+                        ForumsView(
+                            globalState: globalState,
+                            shouldDisplayProgressView: $shouldDisplayProgressView,
+                            forumGroups: $forumGroups
+                        )
+                        .tabItem {
+                            Image(systemName: "square.stack")
+                            Text("Forums")
+                        }
+                        .tag(Tab.forums)
                         FavouritesView()
                             .tabItem {
                                 Image(systemName: "star")
                                 Text("Favourites")
                             }
-                            .tag(Tab.Favourites)
+                            .tag(Tab.favourites)
                         SettingsView(globalState: globalState)
                             .tabItem {
                                 Image(systemName: "gear")
                                 Text("Settings")
                             }
-                            .tag(Tab.Settings)
+                            .tag(Tab.settings)
                     }
                     .onAppear {
                         logger.info("Displaying the TabView")

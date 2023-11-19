@@ -1,13 +1,13 @@
 struct Constants {
-    static let GITHUB_REPO_ADDRESS = "https://github.com/boris1993/iXland"
-    static let COOKIE_NAME_USERHASH = "userhash"
+    static let GitHubRepoAddress = "https://github.com/boris1993/iXland"
+    static let CookieNameUserhash = "userhash"
 }
 
 struct UserDefaultsKey {
-    static let THEME = "theme"
-    static let SUBSCRIPTION_ID = "subscription-id"
-    static let HAPTIC_FEEDBACK = "haptic-feedback"
-    static let CURRENT_COOKIE = "current-cookie"
+    static let Theme = "theme"
+    static let SubscriptionID = "subscription-id"
+    static let HapticFeedback = "haptic-feedback"
+    static let CurrentCookie = "current-cookie"
 }
 
 enum Themes: String {
@@ -16,9 +16,9 @@ enum Themes: String {
 }
 
 struct XdnmbAPI {
-    private static let BASE_URL = "https://www.nmbxd1.com"
-    static let GET_CDN_LIST = "\(BASE_URL)/Api/getCdnPath"
-    static let GET_TIMELINE_LIST = "\(BASE_URL)/Api/getTimelineList"
-    static let GET_FORUM_LIST = "\(BASE_URL)/Api/getForumList"
-    static let GET_TIMELINE = "\(BASE_URL)/Api/Timeline"
+    private static let _BaseURL = "https://www.nmbxd1.com"
+    static let GetCDNList = "\(_BaseURL)/Api/getCdnPath"
+    static let GetTimelineList = "\(_BaseURL)/Api/getTimelineList"
+    static let GetForumList = "\(_BaseURL)/Api/getForumList"
+    static let GetTimeline = "\(_BaseURL)/Api/Timeline"
 }

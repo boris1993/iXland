@@ -22,7 +22,7 @@ struct ForumsView: View {
 
     var body: some View {
         NavigationStack {
-            List ($forumGroups) { $forumGroup in
+            List($forumGroups) { $forumGroup in
                 Section {
                     ForEach(forumGroup.forums) { forum in
                         NavigationLink(destination: CookieListView(globalState: globalState)) {
@@ -46,15 +46,23 @@ struct ForumsView_Previews: PreviewProvider {
     static var previews: some View {
         let context = PersistenceController.preview.container.viewContext
 
-        ForumsView(globalState: globalState, shouldDisplayProgressView: .constant(false), forumGroups: .constant(ForumGroup.sample))
-            .previewDisplayName("en")
-            .environment(\.managedObjectContext, context)
-            .environment(\.colorScheme, .dark)
-            .environment(\.locale, .init(identifier: "en"))
-        ForumsView(globalState: globalState, shouldDisplayProgressView: .constant(false), forumGroups: .constant(ForumGroup.sample))
-            .previewDisplayName("zh-Hans")
-            .environment(\.managedObjectContext, context)
-            .environment(\.colorScheme, .dark)
-            .environment(\.locale, .init(identifier: "zh-Hans"))
+        ForumsView(
+            globalState: globalState,
+            shouldDisplayProgressView: .constant(false),
+            forumGroups: .constant(ForumGroup.sample)
+        )
+        .previewDisplayName("en")
+        .environment(\.managedObjectContext, context)
+        .environment(\.colorScheme, .dark)
+        .environment(\.locale, .init(identifier: "en"))
+        ForumsView(
+            globalState: globalState,
+            shouldDisplayProgressView: .constant(false),
+            forumGroups: .constant(ForumGroup.sample)
+        )
+        .previewDisplayName("zh-Hans")
+        .environment(\.managedObjectContext, context)
+        .environment(\.colorScheme, .dark)
+        .environment(\.locale, .init(identifier: "zh-Hans"))
     }
 }

@@ -7,7 +7,7 @@ final class AnoBbsApiClient {
 
     public static func getCdnPath() async throws -> [CdnList] {
         logger.info("Loading CDN list")
-        return try await doRequest(url: XdnmbAPI.GET_CDN_LIST, method: .get)
+        return try await doRequest(url: XdnmbAPI.GetCDNList, method: .get)
     }
 
     /// 获取版面列表
@@ -17,17 +17,17 @@ final class AnoBbsApiClient {
     ///   - failure: 处理错误信息的回调方法
     public static func loadForumGroups() async throws -> [ForumGroup] {
         logger.info("Loading forum groups")
-        return try await doRequest(url: XdnmbAPI.GET_FORUM_LIST, method: .get)
+        return try await doRequest(url: XdnmbAPI.GetForumList, method: .get)
     }
 
     public static func loadTimelineForums() async throws -> [TimelineForum] {
         logger.info("Loading timeline forums")
-        return try await doRequest(url: XdnmbAPI.GET_TIMELINE_LIST, method: .get)
+        return try await doRequest(url: XdnmbAPI.GetTimelineList, method: .get)
     }
 
     public static func loadTimelineThreads(id: Int) async throws -> [ForumThread] {
         logger.info("Loading timeline")
-        return try await doRequest(url: "\(XdnmbAPI.GET_TIMELINE)?id=\(id)&page=1", method: .get, useCache: false)
+        return try await doRequest(url: "\(XdnmbAPI.GetTimeline)?id=\(id)&page=1", method: .get, useCache: false)
     }
 
     private static func doRequest<T: Codable>(
@@ -40,18 +40,24 @@ final class AnoBbsApiClient {
         let currentSelectedCookie = globalState.currentSelectedCookie
 
         var headers = HTTPHeaders()
-        if (currentSelectedCookie != nil) {
+        if currentSelectedCookie != nil {
             logger.debug("Current selected cookie: \(currentSelectedCookie!.name!)")
-            headers.add(HTTPHeader(name: "Cookie", value: "\(Constants.COOKIE_NAME_USERHASH)=\(currentSelectedCookie!.cookie!)"))
+            headers.add(HTTPHeader(
+                name: "Cookie",
+                value: "\(Constants.CookieNameUserhash)=\(currentSelectedCookie!.cookie!)"))
         }
-
 
         let jsonDecoder = JSONDecoder()
         let request = AF
-            .request(url, method: method, headers: headers ,interceptor: .retryPolicy) { request in request.timeoutInterval = timeout }
+            .request(
+                url,
+                method: method,
+                headers: headers,
+                interceptor: .retryPolicy
+            ) { request in request.timeoutInterval = timeout }
             .validate(statusCode: 200..<299)
 
-        if (useCache) {
+        if useCache {
             request.cacheResponse(using: .cache)
         }
 
@@ -66,12 +72,13 @@ final class AnoBbsApiClient {
             } catch DecodingError.typeMismatch {
                 let errorResponse = try jsonDecoder.decode(AnoBbsSiteError.self, from: data.data(using: .utf8)!)
                 logger.warning("Failed to decode the JSON response. Raw value is: \(errorResponse.error)")
-                throw AppError.RuntimeError(message: errorResponse.error)
+                throw AppError.runtimeError(message: errorResponse.error)
             } catch let error {
-                throw AppError.RuntimeError(message: error.localizedDescription)
+                throw AppError.runtimeError(message: error.localizedDescription)
             }
         case .failure(let error):
-            throw AppError.RuntimeError(message: error.underlyingError?.localizedDescription ?? error.localizedDescription)
+            throw AppError.runtimeError(
+                message: error.underlyingError?.localizedDescription ?? error.localizedDescription)
         }
     }
 }

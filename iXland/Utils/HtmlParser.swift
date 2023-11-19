@@ -4,9 +4,9 @@ import SwiftSoup
 class HtmlParser {
     private init() {}
 
-    private static let XPATH_TEXT_NODE_ANYWHERE = "//text()"
-    private static let XPATH_BR_NODE = "br"
-    private static let XPATH_BR_NODE_EVERYWHERE = "//br"
+    private static let XPathTextNodeAnywhere = "//text()"
+    private static let XPathBRNode = "br"
+    private static let XPathBRNodeEverywhere = "//br"
 
     public static func normalizeTexts(content: String) -> String {
         do {
@@ -42,15 +42,9 @@ class HtmlParser {
                 let linkText = try link.text()
 
                 try link.text("[\(linkText)](\(linkHref))")
-//                try link.prepend("[\(linkText)](\(linkHref))")
-                // TODO remove this node correctly
-//                try link.remove()
             }
-
-//            return document
         } catch {
             print(error)
-//            return document
         }
     }
 }

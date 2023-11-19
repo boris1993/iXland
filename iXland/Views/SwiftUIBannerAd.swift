@@ -52,10 +52,6 @@ final class AdMobBannerAdViewController: UIViewController {
 struct BannerAd: UIViewControllerRepresentable {
     let adUnitId: String
 
-    init(adUnitId: String) {
-        self.adUnitId = adUnitId
-    }
-
     func makeUIViewController(context: Context) -> AdMobBannerAdViewController {
         return AdMobBannerAdViewController(adUnitId: adUnitId)
     }

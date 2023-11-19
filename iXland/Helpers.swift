@@ -46,7 +46,7 @@ class UserDefaultsHelper {
     private static var userDefaults = UserDefaults.standard
 
     static func getCurrentCookie() throws -> Cookie? {
-        let cookieName = userDefaults.string(forKey: UserDefaultsKey.CURRENT_COOKIE)
+        let cookieName = userDefaults.string(forKey: UserDefaultsKey.CurrentCookie)
         if cookieName == nil {
             return nil
         }
@@ -57,20 +57,20 @@ class UserDefaultsHelper {
     }
 
     static func setCurrentCookie(currentCookieName: String) {
-        userDefaults.set(currentCookieName, forKey: UserDefaultsKey.CURRENT_COOKIE)
+        userDefaults.set(currentCookieName, forKey: UserDefaultsKey.CurrentCookie)
     }
 
     static func removeCurrentCookie() {
-        userDefaults.removeObject(forKey: UserDefaultsKey.CURRENT_COOKIE)
+        userDefaults.removeObject(forKey: UserDefaultsKey.CurrentCookie)
     }
 }
 
 class HapticsHelper {
-    @AppStorage(UserDefaultsKey.HAPTIC_FEEDBACK)
+    @AppStorage(UserDefaultsKey.HapticFeedback)
     static var hapticFeedbackEnabled: Bool = false
 
     static func playHapticFeedback() {
-        if (hapticFeedbackEnabled) {
+        if hapticFeedbackEnabled {
             UIImpactFeedbackGenerator(style: .medium).impactOccurred()
         }
     }

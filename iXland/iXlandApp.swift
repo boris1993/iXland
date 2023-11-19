@@ -2,6 +2,7 @@ import SwiftUI
 import GoogleMobileAds
 
 @main
+// swiftlint:disable type_name
 struct iXlandApp: App {
     let persistenceController = PersistenceController.shared
 
@@ -23,3 +24,4 @@ struct iXlandApp: App {
         }
     }
 }
+// swiftlint:enable type_name

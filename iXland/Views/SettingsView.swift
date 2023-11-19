@@ -46,13 +46,13 @@ struct SettingsView: View {
     @State
     private var errorMessage: String = ""
 
-    @AppStorage(UserDefaultsKey.THEME)
+    @AppStorage(UserDefaultsKey.Theme)
     private var themePickerSelectedValue: Themes = Themes.dark
 
-    @AppStorage(UserDefaultsKey.HAPTIC_FEEDBACK)
+    @AppStorage(UserDefaultsKey.HapticFeedback)
     private var hapticFeedbackEnabled: Bool = false
 
-    @AppStorage(UserDefaultsKey.SUBSCRIPTION_ID)
+    @AppStorage(UserDefaultsKey.SubscriptionID)
     private var subscriptionId: String = ""
 
     var body: some View {
@@ -118,7 +118,7 @@ struct SettingsView: View {
                     HStack {
                         Link(
                             "fieldTitleViewInGitHub",
-                            destination: URL(string: Constants.GITHUB_REPO_ADDRESS)!)
+                            destination: URL(string: Constants.GitHubRepoAddress)!)
                     }
                 }
             }

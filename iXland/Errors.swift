@@ -1,18 +1,18 @@
 import Foundation
 
 public enum AppError: Error {
-case InvalidQrCodeResultCount(rawData: String)
-case RuntimeError(message: String)
+case invalidQrCodeResultCount(rawData: String)
+case runtimeError(message: String)
 }
 
 extension AppError: LocalizedError {
     public var errorDescription: String? {
         switch self {
-        case .InvalidQrCodeResultCount(rawData: let rawData):
+        case .invalidQrCodeResultCount(rawData: let rawData):
             return String(
                 format: NSLocalizedString("msgInvalidCookieQrCode", comment: ""),
                 NSLocalizedString(rawData, comment: ""))
-        case .RuntimeError(message: let message):
+        case .runtimeError(message: let message):
             return message
         }
     }

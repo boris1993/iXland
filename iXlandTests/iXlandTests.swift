@@ -8,6 +8,7 @@
 import XCTest
 @testable import iXland
 
+// swiftlint:disable type_name
 final class iXlandTests: XCTestCase {
 
     override func setUpWithError() throws {
@@ -33,5 +34,5 @@ final class iXlandTests: XCTestCase {
             // Put the code you want to measure the time of here.
         }
     }
-
 }
+// swiftlint:enable type_name

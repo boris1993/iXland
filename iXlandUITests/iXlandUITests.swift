@@ -7,6 +7,7 @@
 
 import XCTest
 
+// swiftlint:disable type_name
 final class iXlandUITests: XCTestCase {
 
     override func setUpWithError() throws {
@@ -40,3 +41,4 @@ final class iXlandUITests: XCTestCase {
         }
     }
 }
+// swiftlint:enable type_name

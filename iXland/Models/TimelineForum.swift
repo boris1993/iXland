@@ -30,6 +30,6 @@ struct TimelineForum: Codable, Identifiable {
                       name: "非创作线",
                       displayName: "非创作线",
                       notice: "<b>本时间线不含综合一、欢乐恶搞及部分创作类板块</b>",
-                      maxPage: 20),
+                      maxPage: 20)
     ]
 }

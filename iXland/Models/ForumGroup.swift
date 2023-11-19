@@ -20,7 +20,7 @@ struct ForumGroup: Codable, Identifiable {
             Forum(id: "-1",
                   name: "时间线",
                   msg: "这里是匿名版最新的串"),
-            Forum(id: "4", 
+            Forum(id: "4",
                   fGroup: "4",
                   sort: "2",
                   name: "综合版1",

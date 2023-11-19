@@ -23,7 +23,7 @@ struct TimelineView: View {
     var timelineForums = [TimelineForum]()
 
     @State
-    var timelineNameAndIdDictionary = [String:Int]()
+    var timelineNameAndIdDictionary = [String: Int]()
 
     @State
     var currentSelectedTimelineId = 0
@@ -47,7 +47,7 @@ struct TimelineView: View {
                     } label: {
                     }
                     .pickerStyle(.menu)
-                    .onChange(of: currentSelectedTimelineId) { selectedTimelineForumId in
+                    .onChange(of: currentSelectedTimelineId) { _ in
                         Task {
                             await clearTimelineAndReload()
                         }
@@ -110,15 +110,17 @@ struct TimelineView: View {
     private func loadTimeline() async {
         do {
             self.timelineThreads = try await AnoBbsApiClient.loadTimelineThreads(id: self.currentSelectedTimelineId)
-            for i in 0..<self.timelineThreads.count {
-                self.timelineThreads[i].content = HtmlParser.normalizeTexts(content: self.timelineThreads[i].content)
+            for index in 0..<self.timelineThreads.count {
+                self.timelineThreads[index].content = HtmlParser.normalizeTexts(
+                    content: self.timelineThreads[index].content
+                )
             }
 
             self.timelineInitialized = true
             logger.debug("Done loading timeline")
         } catch let error {
             errorMessage = error.localizedDescription
-            if (timelineInitialized) {
+            if timelineInitialized {
                 isErrorToastShowing = true
             }
         }
@@ -150,7 +152,7 @@ struct TimelineView_Previews: PreviewProvider {
         Container()
             .environmentObject({ () -> GlobalState in
                 let globalState = GlobalState()
-                
+
                 globalState.cdnUrl = "https://image.nmb.best/"
                 globalState.forumIdAndNameDictionary["4"] = "综合版一"
 
