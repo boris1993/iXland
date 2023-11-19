@@ -8,7 +8,11 @@ class HtmlParser {
 
     public static func normalizeTexts(content: String) -> String {
         do {
-            let document = try SwiftSoup.parse(content.replacingOccurrences(of: "\r\n", with: ""))
+            let nomarlizedContent = content
+                .replacingOccurrences(of: "\r\n", with: "")
+                .replacingOccurrences(of: "\r", with: "")
+                .replacingOccurrences(of: "\n", with: "")
+            let document = try SwiftSoup.parse(nomarlizedContent)
             document.outputSettings(OutputSettings().prettyPrint(pretty: false))
 
             try replaceBrToLineBreak(document: document)

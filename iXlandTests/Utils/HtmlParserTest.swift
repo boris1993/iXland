@@ -19,4 +19,22 @@ final class HtmlParserTest: XCTestCase {
         XCTAssertEqual(expected, normalizedString)
     }
 
+    func testNormalizeHTMLWhereBRHasNoSlash() throws {
+        let expected = "line1 \n \nline2 \nline3"
+
+        let html = "line1<br><br>\r\nline2<br>\r\nline3\r\n"
+        let normalizedString = HtmlParser.normalizeTexts(content: html)
+
+        XCTAssertEqual(expected, normalizedString)
+    }
+
+    func testNormalizeHTMLWhereBRHasSpaceWithSlash() throws {
+        let expected = "line1 \n \nline2 \nline3"
+
+        let html = "line1<br />\n<br />\nline2<br />\nline3\n"
+        let normalizedString = HtmlParser.normalizeTexts(content: html)
+
+        XCTAssertEqual(expected, normalizedString)
+    }
+
 }
