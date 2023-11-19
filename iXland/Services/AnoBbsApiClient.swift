@@ -25,9 +25,12 @@ final class AnoBbsApiClient {
         return try await doRequest(url: XdnmbAPI.GetTimelineList, method: .get)
     }
 
-    public static func loadTimelineThreads(id: Int) async throws -> [ForumThread] {
+    public static func loadTimelineThreads(
+        id: Int,
+        page: Int = 1
+    ) async throws -> [ForumThread] {
         logger.info("Loading timeline")
-        return try await doRequest(url: "\(XdnmbAPI.GetTimeline)?id=\(id)&page=1", method: .get, useCache: false)
+        return try await doRequest(url: "\(XdnmbAPI.GetTimeline)?id=\(id)&page=\(page)", method: .get, useCache: false)
     }
 
     private static func doRequest<T: Codable>(

@@ -34,3 +34,5 @@
 "msgFailedToInitialize" = "初始化失败。错误信息：";
 "msgFailedLoadingForumList" = "载入板块列表失败。错误信息：";
 "msgTapToRetry" = "点击这里以重试";
+"msgLoadingMoreThreads" = "正在加载更多的串……";
+"msgAlreadyAtLastPage" = "没有更多的串了";

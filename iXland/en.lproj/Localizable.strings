@@ -34,3 +34,5 @@
 "msgFailedToInitialize" = "Failed to initialize. Error messages:";
 "msgFailedLoadingForumList" = "Failed loading the forums. Error message:";
 "msgTapToRetry" = "Tap here to retry";
+"msgLoadingMoreThreads" = "Loading more threads...";
+"msgAlreadyAtLastPage" = "Already at the last page";

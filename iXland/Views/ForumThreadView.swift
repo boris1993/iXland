@@ -80,24 +80,58 @@ struct ForumThreadView: View {
     }
 }
 
-struct ForumThreadViewNavigationLink: View {
+struct ForumThreadsListView: View {
     @EnvironmentObject
     var globalState: GlobalState
 
     @Binding
     var timelineThreads: [ForumThread]
 
+    @Binding
+    var timelineInitialized: Bool
+
+    @Binding
+    var currentPage: Int
+
+    @Binding
+    var maxPage: Int
+
     var loadAndRefreshFunction: () async -> Void
+
+    var incrementalLoadingFunction: () async -> Void
 
     var body: some View {
         GeometryReader { geometry in
-            List($timelineThreads) { $thread in
-                NavigationLink(destination: Text("")) {
-                    ForumThreadView(geometry: geometry,
-                                    forumThread: $thread)
-                    .environmentObject(globalState)
+            List {
+                ForEach($timelineThreads) { $thread in
+                    NavigationLink(destination: Text("")) {
+                        ForumThreadView(geometry: geometry,
+                                        forumThread: $thread)
+                        .environmentObject(globalState)
+                    }
+                    .buttonStyle(.plain)
                 }
-                .buttonStyle(.plain)
+
+                // MARK: Refresh listener
+                if timelineInitialized {
+                    HStack {
+                        ProgressView()
+                            .progressViewStyle(.circular)
+                            .opacity(currentPage != maxPage ? 1 : 0)
+
+                        Text(currentPage != maxPage ?
+                             String(localized: "msgLoadingMoreThreads") : String(localized: "msgAlreadyAtLastPage")
+                        )
+                        .font(Font.subheadline.weight(.light))
+                    }
+                    .listRowSeparator(.hidden)
+                    .frame(maxWidth: .infinity, alignment: .center)
+                    .onAppear {
+                        Task {
+                            await incrementalLoadingFunction()
+                        }
+                    }
+                }
             }
             .listStyle(PlainListStyle())
             .refreshable {

@@ -29,13 +29,23 @@ struct TimelineView: View {
     var currentSelectedTimelineId = 0
 
     @State
+    var maxPageOfThisTimeline = 0
+
+    @State
+    var currentPage = 1
+
+    @State
     var timelineThreads = [ForumThread]()
 
     var body: some View {
         NavigationStack {
-            ForumThreadViewNavigationLink(
+            ForumThreadsListView(
                 timelineThreads: $timelineThreads,
-                loadAndRefreshFunction: loadTimeline
+                timelineInitialized: $timelineInitialized,
+                currentPage: $currentPage,
+                maxPage: $maxPageOfThisTimeline,
+                loadAndRefreshFunction: loadTimeline,
+                incrementalLoadingFunction: loadMoreTimelineItems
             )
             .environmentObject(globalState)
             .toolbar {
@@ -49,6 +59,10 @@ struct TimelineView: View {
                     .pickerStyle(.menu)
                     .onChange(of: currentSelectedTimelineId) { _ in
                         Task {
+                            self.maxPageOfThisTimeline = timelineForums
+                                .first { timelineForum in
+                                    timelineForum.id == currentSelectedTimelineId
+                                }!.maxPage
                             await clearTimelineAndReload()
                         }
                     }
@@ -103,6 +117,7 @@ struct TimelineView: View {
     private func clearTimelineAndReload() async {
         self.timelineInitialized = false
         self.errorMessage = ""
+        self.currentPage = 1
         self.timelineThreads = []
         await loadTimeline()
     }
@@ -123,6 +138,29 @@ struct TimelineView: View {
             if timelineInitialized {
                 isErrorToastShowing = true
             }
+        }
+    }
+
+    private func loadMoreTimelineItems() async {
+        if currentPage == maxPageOfThisTimeline {
+            return
+        }
+
+        do {
+            currentPage += 1
+
+            logger.info("Loading page \(currentPage) for timeline ID \(currentSelectedTimelineId)")
+            var newThreads = try await AnoBbsApiClient.loadTimelineThreads(
+                id: self.currentSelectedTimelineId, page: currentPage
+            )
+            for index in 0..<newThreads.count {
+                newThreads[index].content = HtmlParser.normalizeTexts(content: newThreads[index].content)
+            }
+
+            self.timelineThreads += newThreads
+        } catch let error {
+            errorMessage = error.localizedDescription
+            isErrorToastShowing = true
         }
     }
 }
